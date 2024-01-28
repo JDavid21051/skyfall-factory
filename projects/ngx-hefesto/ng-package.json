@@ -3,5 +3,6 @@
   "dest": "../../dist/ngx-hefesto",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": ["./assets/*"]
 }
