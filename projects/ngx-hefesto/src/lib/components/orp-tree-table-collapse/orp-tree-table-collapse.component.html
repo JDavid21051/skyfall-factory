@@ -1,0 +1,52 @@
+<ng-container>
+  <ngx-datatable #treeTable *ngIf="dataTable.length > 0 else loading"
+                 class="bootstrap"
+                 [rows]="dataTable"
+                 [columnMode]="columnMode.flex"
+                 [headerHeight]="tableRowHeight"
+                 [footerHeight]="30"
+                 [rowHeight]="tableRowHeight"
+                 [scrollbarV]="false"
+                 [sortType]="sortType.single"
+                 [limit]="limit"
+  >
+    <ngx-datatable-row-detail [rowHeight]="getDetailHeight()">
+      <ng-template let-row="row" ngx-datatable-row-detail-template>
+        <orp-tree-table-basic [rows]="row[childrenKey]" [columns]="childrenColumns" [limit]="childrenLimit"/>
+      </ng-template>
+    </ngx-datatable-row-detail>
+    <ngx-datatable-column
+      [width]="iconColumnWidth"
+      [resizeable]="false"
+      [sortable]="false"
+      [draggable]="false"
+      [canAutoResize]="false"
+      cellClass="py-1"
+    >
+      <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+        <button class="text-black-alpha-90" title="Expand/Collapse Row"
+                [class.datatable-icon-right]="!expanded"
+                [class.datatable-icon-down]="expanded"
+                (click)="toggleExpandRow(row)">
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
+    <ng-container *ngFor="let item  of columns">
+      <ngx-datatable-column [name]="item.name" [prop]="item.keyValue" [resizeable]="false" [flexGrow]="1"
+                            [sortable]="!!item.sort"
+                            headerClass="py-2"
+                            cellClass="py-2">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          <strong>{{ column.name }}</strong>
+        </ng-template>
+        <ng-template let-dataItem="row" ngx-datatable-cell-template>
+          <span> {{ dataItem[item.keyValue] }}</span>
+        </ng-template>
+      </ngx-datatable-column>
+    </ng-container>
+  </ngx-datatable>
+</ng-container>
+
+<ng-template #loading>
+  <orp-spinner></orp-spinner>
+</ng-template>
