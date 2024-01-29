@@ -1,5 +1,4 @@
 <div style="padding: 1rem">
-
   <div style="padding: 1rem">
     <label>
       Claro
@@ -11,6 +10,14 @@
     </label>
   </div>
 
-  <orp-tree-table-collapse *ngIf="spellMockData" [theme]="currentTheme" [dataTable]="spellMockData" [columns]="parentColumns" childrenKey="ingredients" [childrenColumns]="childrenColumns" ></orp-tree-table-collapse>
+  <orp-tree-table-collapse *ngIf="spellMockData"
+                           [theme]="currentTheme"
+                           [dataTable]="spellMockData"
+                           [columns]="parentColumns"
+                           [childrenKey]="'ingredients'"
+                           [withActions]="true"
+                           [childrenColumns]="childrenColumns"
+                           [actionConfig]="config"
+  />
 
 </div>

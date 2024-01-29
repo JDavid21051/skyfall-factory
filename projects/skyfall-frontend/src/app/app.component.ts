@@ -49,6 +49,35 @@ export class AppComponent {
     {name: 'Id', keyValue: 'id'}
   ]
 
+  config = [
+    {
+      label: 'Editar',
+      icon: {
+        icon: 'edit',
+        pack: 'far'
+      },
+      tooltip: 'Editar',
+      click: this.clickEdit
+    },
+    {
+      label: 'Crear',
+      icon: {
+        icon: 'add',
+        pack: 'far'
+      },
+      tooltip: 'Crear',
+      click: this.clickCreate
+    },
+  ]
+
+  clickCreate(res: any) {
+    console.log(res, 'quiero crear');
+  }
+
+  clickEdit(res: any) {
+    console.log(res, 'quiero edit');
+  }
+
   currentTheme: OpTreeThemeEnum = OpTreeThemeEnum.dark;
   treeThemeEnum = OpTreeThemeEnum;
   setCurrentTheme(param: OpTreeThemeEnum) {

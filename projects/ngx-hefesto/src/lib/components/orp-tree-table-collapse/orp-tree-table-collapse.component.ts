@@ -9,15 +9,25 @@ import {
   TABLE_CHILDREN_ROW_HEIGHT,
   TABLE_CHILDREN_ROW_OFFSET
 } from '../../constants/default-config-table.const';
-import {NgClass, NgFor, NgIf} from '@angular/common';
+import {NgClass, NgFor, NgIf, NgTemplateOutlet} from '@angular/common';
 import {SpinnerComponent} from '../orp-spineer/orp-spinner.component';
 import {TreeTableBasicComponent} from '../orp-tree-table-basic/orp-tree-table-basic.component';
 import {OpTreeThemeEnum} from '../../interface/op-tree-theme.type';
 
+interface ActionConfigInterface<T> {
+  label: string,
+  icon: {
+    icon: string,
+    pack: string
+  },
+  tooltip: string,
+  click: Function
+}
+
 @Component({
   selector: 'orp-tree-table-collapse',
   standalone: true,
-  imports: [NgIf, NgFor, NgClass, NgxDatatableModule, TreeTableBasicComponent, SpinnerComponent,],
+  imports: [NgIf, NgFor, NgClass, NgxDatatableModule, TreeTableBasicComponent, SpinnerComponent, NgTemplateOutlet],
   templateUrl: './orp-tree-table-collapse.component.html',
 
 })
@@ -44,6 +54,13 @@ export class TreeTableCollapseComponent<T> {
 
   @Input()
   theme: OpTreeThemeEnum = OpTreeThemeEnum.light;
+
+  @Input()
+  actionConfig: ActionConfigInterface<any>[] = [];
+
+  @Input()
+  withActions= false;
+
 
   opTreeThemeEnum = OpTreeThemeEnum;
   columnMode = ColumnMode;

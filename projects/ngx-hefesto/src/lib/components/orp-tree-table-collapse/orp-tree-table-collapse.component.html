@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <style>
   :host {
     .ngx-datatable {
@@ -76,6 +77,14 @@
     touch-action: manipulation;
   }
 
+  .button_link {
+    border-radius: 4px;
+    border: 0;
+    padding: 0.2rem 0.4rem;
+    margin-right: .5rem;
+    cursor: pointer;
+  }
+
 </style>
 <ngx-datatable #treeTable *ngIf="dataTable.length > 0 else loading"
                [ngClass]="{
@@ -108,8 +117,8 @@
   >
 
   </ngx-datatable-column>
-  <ng-container *ngFor="let item  of columns">
-    <ngx-datatable-column [name]="item.name" [prop]="item.keyValue" [resizeable]="false" [flexGrow]="1"
+  <ng-container>
+    <ngx-datatable-column *ngFor="let item  of columns" [name]="item.name" [prop]="item.keyValue" [resizeable]="false" [flexGrow]="1"
                           [sortable]="!!item.sort"
                           headerClass="py-2"
                           cellClass="py-2">
@@ -118,6 +127,24 @@
       </ng-template>
       <ng-template let-dataItem="row" ngx-datatable-cell-template>
         <span> {{ dataItem[item.keyValue] }}</span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column *ngIf="withActions && actionConfig.length > 0" name="'action'" prop="action" [resizeable]="false" [flexGrow]="1"
+                          [sortable]="false"
+                          headerClass="py-2"
+                          cellClass="py-2">
+      <ng-template ngx-datatable-header-template>
+        <span></span>
+      </ng-template>
+      <ng-template let-dataItem="row" ngx-datatable-cell-template>
+<!--        <ng-template [ngTemplateOutlet]="actionTemplate"></ng-template>-->
+        <ng-container *ngFor="let action of actionConfig">
+          <button class="button_link" [title]="action.tooltip" (click)="action.click(dataItem)">
+            <span class="material-symbols-outlined">
+              {{ action.icon.icon }}
+            </span>
+          </button>
+        </ng-container>
       </ng-template>
     </ngx-datatable-column>
   </ng-container>
