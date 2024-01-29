@@ -1,5 +1,27 @@
 <style>
   :host {
+    .ngx-datatable {
+      &.dark {
+        .op_button_icon:hover {
+          box-shadow: #eeeeee 0 0 8px -2px, transparent 0 0 0 0;
+        }
+      }
+      &.bootstrap {
+        .op_button_icon:hover {
+          box-shadow: #121212 0 0 8px -2px, transparent 0 0 0 0;
+        }
+      }
+    }
+
+    .ngx-datatable .datatable-body .datatable-row-detail {
+      padding: 1rem;
+    }
+
+    .ngx-datatable .datatable-footer {
+      overflow-y: hidden !important;
+    }
+
+    .ngx-datatable.dark .datatable-body .datatable-body-row .datatable-body-cell,
     .ngx-datatable.bootstrap .datatable-body .datatable-body-row .datatable-body-cell {
       padding-top: 8px;
       padding-bottom: 8px;
@@ -10,6 +32,7 @@
         padding: 0 !important;
       }
     }
+    .ngx-datatable.dark .datatable-header .datatable-header-cell,
     .ngx-datatable.bootstrap .datatable-header .datatable-header-cell {
       &.children_header {
         padding-top: 8px;
@@ -53,13 +76,12 @@
     touch-action: manipulation;
   }
 
-  .op_button_icon:hover {
-    box-shadow: #121212 0 0 8px -2px, transparent 0 0 0 0;
-  }
 </style>
-
 <ngx-datatable #treeTable *ngIf="dataTable.length > 0 else loading"
-               class="bootstrap"
+               [ngClass]="{
+                 'dark': this.theme === opTreeThemeEnum.dark,
+                 'bootstrap': this.theme === opTreeThemeEnum.light
+               }"
                [rows]="dataTable"
                [columnMode]="columnMode.flex"
                [headerHeight]="tableRowHeight"
@@ -67,9 +89,10 @@
                [rowHeight]="tableRowHeight"
                [scrollbarV]="false"
                [sortType]="sortType.single"
-               [limit]="limit"
+               [limit]="limit"f
+
 >
-  <ngx-datatable-row-detail [rowHeight]="getDetailHeight()">
+  <ngx-datatable-row-detail [rowHeight]="getDetailHeight()" style="padding: 1rem">
     <ng-template let-row="row" ngx-datatable-row-detail-template>
       <orp-tree-table-basic [rows]="row[childrenKey]" [columns]="childrenColumns" [limit]="childrenLimit"/>
     </ng-template>

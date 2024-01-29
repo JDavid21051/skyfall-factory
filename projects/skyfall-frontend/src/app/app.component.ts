@@ -2,9 +2,10 @@ import {Component, inject} from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {NgIf} from '@angular/common';
-// import {TreeTableCollapseComponent} from '../../../ngx-hefesto/src/lib/components';
-import {TreeTableCollapseComponent} from 'ngx-hefesto';
+import {TreeTableCollapseComponent} from '../../../ngx-hefesto/src/lib/components';
+// import {TreeTableCollapseComponent} from 'ngx-hefesto';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
+import {OpTreeThemeEnum} from '../../../ngx-hefesto/src/lib/interface/op-tree-theme.type';
 
 export interface mockSpellsTreeTableData {
   id: string,
@@ -47,6 +48,12 @@ export class AppComponent {
     {name: 'Nombre', keyValue: 'name'},
     {name: 'Id', keyValue: 'id'}
   ]
+
+  currentTheme: OpTreeThemeEnum = OpTreeThemeEnum.dark;
+  treeThemeEnum = OpTreeThemeEnum;
+  setCurrentTheme(param: OpTreeThemeEnum) {
+    this.currentTheme = param
+  }
 
   constructor() {
     this.spellMockData$$.subscribe({

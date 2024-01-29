@@ -8,7 +8,7 @@ import {NgFor, NgIf} from '@angular/common';
   standalone: true,
   imports: [NgIf, NgFor, NgxDatatableModule],
   template: `
-    <ngx-datatable *ngIf="rows.length > 0 else noData" class="material"
+    <ngx-datatable *ngIf="rows.length > 0 else noData" class="bootstrap"
                    rowHeight="auto"
                    [rows]="rows"
                    [columnMode]="columnMode"

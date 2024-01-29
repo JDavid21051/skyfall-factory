@@ -9,14 +9,15 @@ import {
   TABLE_CHILDREN_ROW_HEIGHT,
   TABLE_CHILDREN_ROW_OFFSET
 } from '../../constants/default-config-table.const';
-import {NgFor, NgIf} from '@angular/common';
+import {NgClass, NgFor, NgIf} from '@angular/common';
 import {SpinnerComponent} from '../orp-spineer/orp-spinner.component';
 import {TreeTableBasicComponent} from '../orp-tree-table-basic/orp-tree-table-basic.component';
+import {OpTreeThemeEnum} from '../../interface/op-tree-theme.type';
 
 @Component({
   selector: 'orp-tree-table-collapse',
   standalone: true,
-  imports: [NgIf, NgFor, NgxDatatableModule, TreeTableBasicComponent, SpinnerComponent,],
+  imports: [NgIf, NgFor, NgClass, NgxDatatableModule, TreeTableBasicComponent, SpinnerComponent,],
   templateUrl: './orp-tree-table-collapse.component.html',
 
 })
@@ -41,10 +42,20 @@ export class TreeTableCollapseComponent<T> {
   @Input()
   limit = TABLE_LIMIT;
 
+  @Input()
+  theme: OpTreeThemeEnum = OpTreeThemeEnum.light;
+
+  opTreeThemeEnum = OpTreeThemeEnum;
   columnMode = ColumnMode;
   sortType = SortType;
   childrenTableLength = 3;
   currentRowExpanded: any;
+
+  iconColumnWidth = TABLE_COLUMN_ICON_WIDTH;
+  tableRowHeight = TABLE_ROW_HEIGHT;
+  childrenRowHeight = TABLE_CHILDREN_ROW_HEIGHT;
+  childrenRowOff = TABLE_CHILDREN_ROW_OFFSET;
+
 
   toggleExpandRow(row: any) {
     if (this.currentRowExpanded) {
@@ -61,12 +72,6 @@ export class TreeTableCollapseComponent<T> {
     this.childrenTableLength = row[this.childrenKey].length;
   }
 
-  iconColumnWidth = TABLE_COLUMN_ICON_WIDTH;
-  tableRowHeight = TABLE_ROW_HEIGHT;
-  childrenRowHeight = TABLE_CHILDREN_ROW_HEIGHT;
-  childrenRowOff = TABLE_CHILDREN_ROW_OFFSET;
-
-
   getDetailHeight() {
     return this.childrenRowOff + (this.childrenRowHeight * this.calcHeight());
   }
@@ -75,4 +80,5 @@ export class TreeTableCollapseComponent<T> {
     const result = Math.floor(this.childrenTableLength / this.childrenLimit);
     return this.childrenTableLength > 0 ? (result > 2 ? result : this.childrenLimit) : 1;
   }
+
 }

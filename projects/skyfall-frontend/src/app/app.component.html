@@ -1,4 +1,16 @@
 <div style="padding: 1rem">
-  <orp-tree-table-collapse *ngIf="spellMockData" [dataTable]="spellMockData" [columns]="parentColumns" childrenKey="ingredients" [childrenColumns]="childrenColumns" ></orp-tree-table-collapse>
+
+  <div style="padding: 1rem">
+    <label>
+      Claro
+      <input type="radio" name="theme" value="light" (click)="setCurrentTheme(treeThemeEnum.light)">
+    </label>
+    <label>
+      Oscuro
+      <input type="radio" name="theme" value="dark" checked (click)="setCurrentTheme(treeThemeEnum.dark)">
+    </label>
+  </div>
+
+  <orp-tree-table-collapse *ngIf="spellMockData" [theme]="currentTheme" [dataTable]="spellMockData" [columns]="parentColumns" childrenKey="ingredients" [childrenColumns]="childrenColumns" ></orp-tree-table-collapse>
 
 </div>
