@@ -1,24 +1,89 @@
-# NgxHefesto
+<h1 align="center">
+  <a href="https://github.com/JDavid21051/skyfall-factory">
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
+   [![My Skills](https://skillicons.dev/icons?i=angular&theme=light)](https://skillicons.dev) 
+    Hefesto
+    
+  </a>
+</h1>
 
-## Code scaffolding
+## Contents
 
-Run `ng generate component component-name --project ngx-hefesto` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-hefesto`.
-> Note: Don't forget to add `--project ngx-hefesto` or else it will be added to the default project in your `angular.json` file. 
+- [Description](#-description)
+- [Requirements](#-requirements)
+- [Manage this Angular lib](#-building)
+- [License](#-license)
 
-## Build
 
-Run `ng build ngx-hefesto` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 📋 Description
 
-## Publishing
+La librería ngx-hefesto proporciona una poderosa tabla anidada con capacidad para colapsar las filas para mostrar una segunda tabla con una configuración de columnas diferentes al padre. Permite crear interfaces de usuario flexibles y organizadas para mostrar datos jerárquicos y con estructuras definidas.
 
-After building your library with `ng build ngx-hefesto`, go to the dist folder `cd dist/ngx-hefesto` and run `npm publish`.
+## 📖 Requirements
 
-## Running unit tests
+- [Nodejs => v18.x][node]
 
-Run `ng test ngx-hefesto` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash 
+brew install node 
+```
 
-## Further help
+- [@angular/cli => V13.2.x][angular]
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash 
+npm install -g @angular/cli 
+```
+
+- [@swimlane/ngx-data => V20.xx][dateTable]
+
+```bash 
+npm install @swimlane/ngx-datatable 
+```
+
+[node]: https://nodejs.org/en
+[angular]: https://angular.io/cli
+[dateTable]: https://swimlane.gitbook.io/ngx-datatable/readme/installing
+
+## 🚀 Building
+
+1. Install dependencies 
+
+```bash 
+npm install 
+```
+
+2. Compile library
+
+```bash 
+ng build ngx-hefesto 
+```
+
+2. Generate installer
+
+```bash 
+npm pack ngx-hefesto 
+```
+
+
+## 📄 License
+
+MIT License
+
+Copyright (c) 2024 Juan David Pelaez
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
