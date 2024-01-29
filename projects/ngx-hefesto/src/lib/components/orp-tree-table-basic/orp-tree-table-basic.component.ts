@@ -21,8 +21,8 @@ import {NgFor, NgIf} from '@angular/common';
       <ng-container *ngFor="let item  of columns">
         <ngx-datatable-column [name]="item.name" [prop]="item.keyValue" [resizeable]="false" [flexGrow]="1"
                               [sortable]="!!item.sort"
-                              headerClass="py-2"
-                              cellClass="py-2">
+                              headerClass="py-2 children_header"
+                              cellClass="py-2 children_row">
           <ng-template let-column="column" ngx-datatable-header-template>
             <strong>{{ column.name }}</strong>
           </ng-template>

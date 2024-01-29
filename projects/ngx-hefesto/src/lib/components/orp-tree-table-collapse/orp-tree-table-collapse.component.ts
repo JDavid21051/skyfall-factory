@@ -16,8 +16,9 @@ import {TreeTableBasicComponent} from '../orp-tree-table-basic/orp-tree-table-ba
 @Component({
   selector: 'orp-tree-table-collapse',
   standalone: true,
-  imports: [NgIf, NgFor, NgxDatatableModule, TreeTableBasicComponent, SpinnerComponent],
-  templateUrl: './orp-tree-table-collapse.component.html'
+  imports: [NgIf, NgFor, NgxDatatableModule, TreeTableBasicComponent, SpinnerComponent,],
+  templateUrl: './orp-tree-table-collapse.component.html',
+
 })
 export class TreeTableCollapseComponent<T> {
   @ViewChild('treeTable') table!: DatatableComponent;
@@ -35,7 +36,7 @@ export class TreeTableCollapseComponent<T> {
   childrenKey = '';
 
   @Input()
-  childrenLimit= TABLE_CHILDREN_LIMIT;
+  childrenLimit = TABLE_CHILDREN_LIMIT;
 
   @Input()
   limit = TABLE_LIMIT;
@@ -60,10 +61,10 @@ export class TreeTableCollapseComponent<T> {
     this.childrenTableLength = row[this.childrenKey].length;
   }
 
-  readonly iconColumnWidth = TABLE_COLUMN_ICON_WIDTH;
-  readonly tableRowHeight = TABLE_ROW_HEIGHT;
-  readonly childrenRowHeight = TABLE_CHILDREN_ROW_HEIGHT;
-  readonly childrenRowOff = TABLE_CHILDREN_ROW_OFFSET;
+  iconColumnWidth = TABLE_COLUMN_ICON_WIDTH;
+  tableRowHeight = TABLE_ROW_HEIGHT;
+  childrenRowHeight = TABLE_CHILDREN_ROW_HEIGHT;
+  childrenRowOff = TABLE_CHILDREN_ROW_OFFSET;
 
 
   getDetailHeight() {

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   template: `
     <div class="orp-spinner"></div>
   `,
-  styleUrl: './orp-spinner.component.scss'
+  styleUrls: ['./orp-spinner.component.scss']
 })
 export class SpinnerComponent {
 
