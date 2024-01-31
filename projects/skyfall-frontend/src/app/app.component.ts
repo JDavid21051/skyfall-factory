@@ -2,10 +2,11 @@ import {Component, inject} from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {NgIf} from '@angular/common';
-import {TreeTableCollapseComponent} from '../../../ngx-hefesto/src/lib/components';
-// import {TreeTableCollapseComponent} from 'ngx-hefesto';
+//import {TreeTableCollapseComponent} from '../../../ngx-hefesto/src/lib/components';
+import {TreeTableCollapseComponent} from 'ngx-hefesto';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {OpTreeThemeEnum} from '../../../ngx-hefesto/src/lib/interface/op-tree-theme.type';
+import {ActionTypeEnum} from '../../../ngx-hefesto/src/lib/interface/tree-nested.interface';
 
 export interface mockSpellsTreeTableData {
   id: string,
@@ -23,6 +24,38 @@ export interface mockSpellsTreeTableData {
   manufacturer: null | string
 }
 
+export interface mockSpellsTreeTableData {
+  id: string,
+  name: string,
+  effect: string,
+  sideEffects: string,
+  characteristics: string | null,
+  time: null,
+  difficulty: string,
+  ingredients: {
+    id: string,
+    name: string
+  }[],
+  inventors: any[],
+  manufacturer: null | string
+}
+
+export interface mockBookTreeTableData {
+  id: number,
+  Year: number,
+  Title: string,
+  handle: string,
+  Publisher: string,
+  ISBN: string,
+  Pages: number,
+  Notes: any[],
+  created_at: string,
+  villains: {
+    actor: string,
+    url: string
+  }[]
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -35,6 +68,9 @@ export class AppComponent {
   private readonly http = inject(HttpClient)
   spellMockData$$: Observable<mockSpellsTreeTableData[]> = this.http.get<mockSpellsTreeTableData[]>('../../../assets/mock/alternative.json');
   spellMockData?: mockSpellsTreeTableData[];
+
+  bookListData$$: Observable<mockBookTreeTableData[]> = this.http.get<mockBookTreeTableData[]>('../../../assets/mock/books.json');
+  bookListData?: mockBookTreeTableData[];
 
   parentColumns = [
     {name: 'Nombre', keyValue: 'name', sort: true},
@@ -51,6 +87,7 @@ export class AppComponent {
 
   config = [
     {
+      type: ActionTypeEnum.icon,
       label: 'Editar',
       icon: {
         icon: 'edit',
@@ -60,6 +97,7 @@ export class AppComponent {
       click: this.clickEdit
     },
     {
+      type: ActionTypeEnum.icon,
       label: 'Crear',
       icon: {
         icon: 'add',
@@ -86,7 +124,15 @@ export class AppComponent {
 
   constructor() {
     this.spellMockData$$.subscribe({
-      next: (response) => this.spellMockData = response
+      next: (response) => {
+        this.spellMockData = response;
+      }
+    })
+
+    this.bookListData$$.subscribe({
+      next: (response) => {
+        this.bookListData = response;
+      }
     })
   }
 }

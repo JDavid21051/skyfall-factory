@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {TreeTableColumnInterface} from '../../interface/tree-table-column.interface';
+import {TreeNestedColumnInterface} from '../../interface/tree-nested.interface';
 import {ColumnMode, NgxDatatableModule, SortType} from '@swimlane/ngx-datatable';
 import {NgFor, NgIf} from '@angular/common';
 
@@ -42,7 +42,7 @@ export class TreeTableBasicComponent<T> {
   rows: T[] = [];
 
   @Input()
-  columns: TreeTableColumnInterface[] = [];
+  columns: TreeNestedColumnInterface[] = [];
 
   @Input()
   limit = 3;

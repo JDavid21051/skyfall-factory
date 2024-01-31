@@ -1,6 +1,6 @@
 import {Component, Input, ViewChild} from '@angular/core';
 import {ColumnMode, DatatableComponent, NgxDatatableModule, SortType} from '@swimlane/ngx-datatable';
-import {TreeTableColumnInterface} from '../../interface/tree-table-column.interface';
+import {ActionConfigInterface, TreeNestedColumnInterface} from '../../interface/tree-nested.interface';
 import {
   TABLE_CHILDREN_LIMIT,
   TABLE_COLUMN_ICON_WIDTH,
@@ -14,34 +14,25 @@ import {SpinnerComponent} from '../orp-spineer/orp-spinner.component';
 import {TreeTableBasicComponent} from '../orp-tree-table-basic/orp-tree-table-basic.component';
 import {OpTreeThemeEnum} from '../../interface/op-tree-theme.type';
 
-interface ActionConfigInterface<T> {
-  label: string,
-  icon: {
-    icon: string,
-    pack: string
-  },
-  tooltip: string,
-  click: Function
-}
 
 @Component({
-  selector: 'orp-tree-table-collapse',
+  selector: 'tree-table-nested',
   standalone: true,
   imports: [NgIf, NgFor, NgClass, NgxDatatableModule, TreeTableBasicComponent, SpinnerComponent, NgTemplateOutlet],
-  templateUrl: './orp-tree-table-collapse.component.html',
+  templateUrl: './orp-tree-table-collapse.component.html'
 
 })
-export class TreeTableCollapseComponent<T> {
+export class TreeTableNestedComponent<T> {
   @ViewChild('treeTable') table!: DatatableComponent;
 
   @Input()
   dataTable: T[] = [];
 
   @Input()
-  columns: TreeTableColumnInterface[] = [];
+  columns: TreeNestedColumnInterface[] = [];
 
   @Input()
-  childrenColumns: TreeTableColumnInterface[] = [];
+  childrenColumns: TreeNestedColumnInterface[] = [];
 
   @Input()
   childrenKey = '';
@@ -56,11 +47,10 @@ export class TreeTableCollapseComponent<T> {
   theme: OpTreeThemeEnum = OpTreeThemeEnum.light;
 
   @Input()
-  actionConfig: ActionConfigInterface<any>[] = [];
+  actionConfig: ActionConfigInterface[] = [];
 
   @Input()
   withActions= false;
-
 
   opTreeThemeEnum = OpTreeThemeEnum;
   columnMode = ColumnMode;
