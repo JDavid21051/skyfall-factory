@@ -32,6 +32,11 @@
         place-content: center !important;
         padding: 0 !important;
       }
+
+      &.no-p {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
     }
     .ngx-datatable.dark .datatable-header .datatable-header-cell,
     .ngx-datatable.bootstrap .datatable-header .datatable-header-cell {
@@ -132,7 +137,7 @@
     <ngx-datatable-column *ngIf="withActions && actionConfig.length > 0" name="'action'" prop="action" [resizeable]="false" [flexGrow]="1"
                           [sortable]="false"
                           headerClass="py-2"
-                          cellClass="py-2">
+                          cellClass="no-p">
       <ng-template ngx-datatable-header-template>
         <span></span>
       </ng-template>
