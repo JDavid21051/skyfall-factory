@@ -7,23 +7,32 @@ on:
     branches: [ "develop" ]
 
 jobs:
+
+  checkout:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+  nodeAndAngular:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Use Node.js v18
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install angular cli
+        run: |
+          npm install -g @angular/cli
+
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-
-    - name: Use Node.js v18
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-
-    - name: Install angular cli
-      run: |
-        npm install -g @angular/cli
-
     - name: Install dependencies
       run: |
         npm install --no-optional
@@ -31,4 +40,17 @@ jobs:
     - name: Build library
       run: |
         ng build ngx-hefesto
+
+
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Move to folder
+        run: |
+          cd ./dist/ngx-hefesto
+
+      - name: publish lib
+        run: |
+          npm publish --access public
 

@@ -1,4 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+/**
+
+
+name: NodeJS with Webpack
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Use Node.js v18
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install angular cli
+      run: |
+        npm install -g @angular/cli
+
+    - name: Install dependencies
+      run: |
+        npm install --no-optional
+
+    - name: Build library
+      run: |
+        ng build ngx-hefesto
+
+
+ */
 @import '../../../node_modules/@swimlane/ngx-datatable/index.css';
 @import '../../../node_modules/@swimlane/ngx-datatable/themes/material.css';
 @import '../../../node_modules/@swimlane/ngx-datatable/themes/bootstrap.css';
