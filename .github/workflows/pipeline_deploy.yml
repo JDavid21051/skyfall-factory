@@ -15,10 +15,10 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Use Node.js v20
+    - name: Use Node.js v18
       uses: actions/setup-node@v3
       with:
-        node-version: '20'
+        node-version: '18'
 
     - name: Install dependencies
       run: |
