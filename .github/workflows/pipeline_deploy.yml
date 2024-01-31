@@ -1,0 +1,28 @@
+name: NodeJS with Webpack
+
+on:
+  push:
+    branches: [ "develop", "stage" ]
+  pull_request:
+    branches: [ "develop", "stage" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Use Node.js v.18
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: |
+        npm install
+
+    - name: Build
+        
