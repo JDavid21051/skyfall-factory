@@ -3,7 +3,6 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {NgIf} from '@angular/common';
 //import {TreeTableCollapseComponent} from '../../../ngx-hefesto/src/lib/components';
-import {TreeTableCollapseComponent} from 'ngx-hefesto';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {OpTreeThemeEnum} from '../../../ngx-hefesto/src/lib/interface/op-tree-theme.type';
 import {ActionTypeEnum} from '../../../ngx-hefesto/src/lib/interface/tree-nested.interface';
@@ -60,11 +59,10 @@ export interface mockBookTreeTableData {
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [NgIf, HttpClientModule, NgxDatatableModule, TreeTableCollapseComponent],
+  imports: [NgIf, HttpClientModule, NgxDatatableModule],
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'skyfall-frontend';
   private readonly http = inject(HttpClient)
   spellMockData$$: Observable<mockSpellsTreeTableData[]> = this.http.get<mockSpellsTreeTableData[]>('../../../assets/mock/alternative.json');
   spellMockData?: mockSpellsTreeTableData[];

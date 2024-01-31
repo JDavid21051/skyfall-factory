@@ -40,6 +40,5 @@
     "typescript": "~4.9.4"
   },
   "optionalDependencies": {
-    "ngx-hefesto": "file:dist/ngx-hefesto/ngx-hefesto-0.0.1-alpha-8.tgz"
   }
 }

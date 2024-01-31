@@ -132,6 +132,39 @@
           }
         }
       }
-    }
+    },
+    "ngx-table-nested": {
+      "projectType": "library",
+      "root": "projects/ngx-table-nested",
+      "sourceRoot": "projects/ngx-table-nested/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-table-nested/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-table-nested/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-table-nested/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ngx-table-nested/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
   }
 }

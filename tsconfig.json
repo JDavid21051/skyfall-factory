@@ -14,6 +14,11 @@
     "paths": {
       "ngx-hefesto": [
         "dist/ngx-hefesto"
+      ],
+      "ngx-table-nested": [
+        "dist/ngx-table-nested",
+        "dist/ngx-table-nested",
+        "dist/ngx-table-nested"
       ]
     },
     "declaration": false,
