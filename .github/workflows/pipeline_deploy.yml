@@ -20,13 +20,13 @@ jobs:
       with:
         node-version: '18'
 
-    - name: Install dependencies
-      run: |
-        npm install
-
     - name: Install angular cli
       run: |
         npm install -g @angular/cli
+
+    - name: Install dependencies
+      run: |
+        npm install --no-optional
 
     - name: Build library
       run: |
