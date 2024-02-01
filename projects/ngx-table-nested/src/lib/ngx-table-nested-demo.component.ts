@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'lib-ngx-table-nested',
+  selector: 'table-nested-demo',
   template: `
     <p>
       ngx-table-nested works!
@@ -10,6 +10,6 @@ import { Component } from '@angular/core';
   styles: [
   ]
 })
-export class NgxTableNestedComponent {
+export class NgxTableNestedDemoComponent {
 
 }

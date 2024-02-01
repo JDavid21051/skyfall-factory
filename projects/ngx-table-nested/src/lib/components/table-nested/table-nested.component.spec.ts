@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NgxTableNestedComponent } from './ngx-table-nested.component';
+import { TableNestedComponent } from './table-nested.component';
 
-describe('NgxTableNestedComponent', () => {
-  let component: NgxTableNestedComponent;
-  let fixture: ComponentFixture<NgxTableNestedComponent>;
+describe('TableNestedComponent', () => {
+  let component: TableNestedComponent;
+  let fixture: ComponentFixture<TableNestedComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NgxTableNestedComponent ]
+      imports: [ TableNestedComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NgxTableNestedComponent);
+    fixture = TestBed.createComponent(TableNestedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

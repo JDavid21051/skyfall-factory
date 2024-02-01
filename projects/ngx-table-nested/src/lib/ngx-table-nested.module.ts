@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
-import { NgxTableNestedComponent } from './ngx-table-nested.component';
+import { NgxTableNestedDemoComponent } from './ngx-table-nested-demo.component';
 
 
 
 @NgModule({
   declarations: [
-    NgxTableNestedComponent
+    NgxTableNestedDemoComponent
   ],
   imports: [
   ],
   exports: [
-    NgxTableNestedComponent
+    NgxTableNestedDemoComponent
   ]
 })
 export class NgxTableNestedModule { }
