@@ -2,6 +2,7 @@
   "name": "skyfall-factory",
   "version": "0.0.0",
   "description": "The ngx-table-nested library provides a powerful nested table with the ability to collapse rows to display a second table with a different column configuration than the parent. It allows you to create flexible and organised user interfaces to display hierarchical and structured data.",
+  "license": "MIT License",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -22,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
     "@swimlane/ngx-datatable": "20.1.0",
+    "ngx-table-nested": "^0.0.1-demo-5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
@@ -39,7 +41,5 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "ng-packagr": "^15.2.2",
     "typescript": "~4.9.4"
-  },
-  "optionalDependencies": {
   }
 }

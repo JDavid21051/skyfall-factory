@@ -4,7 +4,7 @@ import {ColumnMode, NgxDatatableModule, SortType} from '@swimlane/ngx-datatable'
 import {NgFor, NgIf} from '@angular/common';
 
 @Component({
-  selector: 'table-basic',
+  selector: 'ngx-table-basic',
   standalone: true,
   imports: [NgIf, NgFor, NgxDatatableModule],
   template: `

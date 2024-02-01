@@ -1,5 +1,5 @@
 import {Component, Input, ViewChild} from '@angular/core';
-import {CommonModule, NgForOf, NgIf} from '@angular/common';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {ColumnMode, DatatableComponent, NgxDatatableModule, SortType} from '@swimlane/ngx-datatable';
 import {
   TABLE_CHILDREN_LIMIT,
@@ -14,13 +14,12 @@ import {
   TableNestedThemeEnum,
   TreeNestedColumnInterface
 } from '../../interfaces/tree-nested.models';
-import {TableSpinnerComponent} from '../table-spinner/table-spinner.component';
 import {TableBasicComponent} from '../table-basic/table-basic.component';
 
 @Component({
   selector: 'ngx-table-nested',
   standalone: true,
-  imports: [CommonModule, NgForOf, NgIf, NgxDatatableModule, TableSpinnerComponent, TableBasicComponent],
+  imports: [NgForOf, NgIf, NgClass, NgxDatatableModule, TableBasicComponent],
   templateUrl: './table-nested.component.html'
 })
 export class TableNestedComponent<T> {

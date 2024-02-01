@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
 <style>
   :host {
     .ngx-datatable {
@@ -7,6 +8,7 @@
           box-shadow: #eeeeee 0 0 8px -2px, transparent 0 0 0 0;
         }
       }
+
       &.bootstrap {
         .op_button_icon:hover {
           box-shadow: #121212 0 0 8px -2px, transparent 0 0 0 0;
@@ -38,6 +40,7 @@
         padding-bottom: 0;
       }
     }
+
     .ngx-datatable.dark .datatable-header .datatable-header-cell,
     .ngx-datatable.bootstrap .datatable-header .datatable-header-cell {
       &.children_header {
@@ -45,6 +48,7 @@
         padding-bottom: 8px;
         background: #d9d9d9;
       }
+
       &.children_row {
         padding-top: 8px;
         padding-bottom: 8px;
@@ -88,82 +92,85 @@
     padding: 0.2rem;
     margin-right: .5rem;
     cursor: pointer;
+    vertical-align: middle;
+
     & span {
       font-size: 16px !important;
     }
   }
 
 </style>
-<ngx-datatable #treeTable *ngIf="dataTable.length > 0 else loading"
-               [ngClass]="{
+<ng-container *ngIf="dataTable.length > 0">
+  <ngx-datatable #treeTable
+                 [ngClass]="{
                  'dark': this.theme === tableTheme.dark,
                  'bootstrap': this.theme === tableTheme.light
                }"
-               [rows]="dataTable"
-               [columnMode]="columnMode.flex"
-               [headerHeight]="tableRowHeight"
-               [footerHeight]="30"
-               [rowHeight]="tableRowHeight"
-               [scrollbarV]="false"
-               [sortType]="sortType.single"
-               [limit]="limit"f
+                 [rows]="dataTable"
+                 [columnMode]="columnMode.flex"
+                 [headerHeight]="tableRowHeight"
+                 [footerHeight]="30"
+                 [rowHeight]="tableRowHeight"
+                 [scrollbarV]="false"
+                 [sortType]="sortType.single"
+                 [limit]="limit"
 
->
-  <ngx-datatable-row-detail [rowHeight]="getDetailHeight()" style="padding: 1rem">
-    <ng-template let-row="row" ngx-datatable-row-detail-template>
-      <table-basic [rows]="row[childrenKey]" [columns]="childrenColumns" [limit]="childrenLimit"/>
-    </ng-template>
-  </ngx-datatable-row-detail>
-  <ngx-datatable-column
-    [width]="iconColumnWidth"
-    [resizeable]="false"
-    [sortable]="false"
-    [draggable]="false"
-    [canAutoResize]="false"
-    cellClass="icon_content_cell"
-    [cellTemplate]="iconCollapse"
   >
+    <ngx-datatable-row-detail [rowHeight]="getDetailHeight()" style="padding: 1rem">
+      <ng-template let-row="row" ngx-datatable-row-detail-template>
+        <ngx-table-basic [rows]="row[childrenKey]" [columns]="childrenColumns" [limit]="childrenLimit"/>
+      </ng-template>
+    </ngx-datatable-row-detail>
+    <ngx-datatable-column
+      [width]="iconColumnWidth"
+      [resizeable]="false"
+      [sortable]="false"
+      [draggable]="false"
+      [canAutoResize]="false"
+      cellClass="icon_content_cell"
+      [cellTemplate]="iconCollapse"
+    >
 
-  </ngx-datatable-column>
-  <ng-container>
-    <ngx-datatable-column *ngFor="let item  of columns" [name]="item.name" [prop]="item.keyValue" [resizeable]="false" [flexGrow]="1"
-                          [sortable]="!!item.sort"
-                          headerClass="py-2"
-                          cellClass="py-2">
-      <ng-template let-column="column" ngx-datatable-header-template>
-        <strong>{{ column.name }}</strong>
-      </ng-template>
-      <ng-template let-dataItem="row" ngx-datatable-cell-template>
-        <span> {{ dataItem[item.keyValue] }}</span>
-      </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column *ngIf="withActions && actionConfig.length > 0" name="'action'" prop="action" [resizeable]="false" [flexGrow]="1"
-                          [sortable]="false"
-                          headerClass="py-2"
-                          cellClass="no-p">
-      <ng-template ngx-datatable-header-template>
-        <span></span>
-      </ng-template>
-      <ng-template let-dataItem="row" ngx-datatable-cell-template>
-        <!--        <ng-template [ngTemplateOutlet]="actionTemplate"></ng-template>-->
-        <ng-container *ngFor="let action of actionConfig">
-          <button class="button_link" [title]="action.tooltip" (click)="action.click(dataItem)">
+    <ng-container>
+      <ngx-datatable-column *ngFor="let item  of columns" [name]="item.name" [prop]="item.keyValue" [resizeable]="false"
+                            [flexGrow]="1"
+                            [sortable]="!!item.sort"
+                            headerClass="py-2"
+                            cellClass="py-2">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          <strong>{{ column.name }}</strong>
+        </ng-template>
+        <ng-template let-dataItem="row" ngx-datatable-cell-template>
+          <span> {{ dataItem[item.keyValue] }}</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column *ngIf="withActions && actionConfig.length > 0" name="'action'" prop="action"
+                            [resizeable]="false" [flexGrow]="1"
+                            [sortable]="false"
+                            headerClass="py-2"
+                            cellClass="no-p">
+        <ng-template ngx-datatable-header-template>
+          <span></span>
+        </ng-template>
+        <ng-template let-dataItem="row" ngx-datatable-cell-template>
+          <!--        <ng-template [ngTemplateOutlet]="actionTemplate"></ng-template>-->
+          <ng-container *ngFor="let action of actionConfig">
+            <button class="button_link" [title]="action.tooltip" (click)="action.click(dataItem)">
             <span class="material-symbols-outlined">
               {{ action.icon.icon }}
             </span>
-          </button>
-        </ng-container>
-      </ng-template>
-    </ngx-datatable-column>
-  </ng-container>
-</ngx-datatable>
-<ng-template #loading>
-  <table-spinner/>
-</ng-template>
-<ng-template #iconCollapse let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-  <button class="op_button_icon" title="Expand/Collapse Row"
-          [class.datatable-icon-right]="!expanded"
-          [class.datatable-icon-down]="expanded"
-          (click)="toggleExpandRow(row)">
-  </button>
-</ng-template>
+            </button>
+          </ng-container>
+        </ng-template>
+      </ngx-datatable-column>
+    </ng-container>
+  </ngx-datatable>
+  <ng-template #iconCollapse let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+    <button class="op_button_icon" title="Expand/Collapse Row"
+            [class.datatable-icon-right]="!expanded"
+            [class.datatable-icon-down]="expanded"
+            (click)="toggleExpandRow(row)">
+    </button>
+  </ng-template>
+</ng-container>

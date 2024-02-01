@@ -2,10 +2,13 @@ import {Component, inject} from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {NgIf} from '@angular/common';
-//import {TreeTableCollapseComponent} from '../../../ngx-hefesto/src/lib/components';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
-import {OpTreeThemeEnum} from '../../../ngx-hefesto/src/lib/interface/op-tree-theme.type';
-import {ActionTypeEnum} from '../../../ngx-hefesto/src/lib/interface/tree-nested.interface';
+import {
+  TableNestedComponent,
+  TableNestedThemeEnum,
+  ActionTypeEnum,
+  TableSpinnerComponent
+} from 'ngx-table-nested';
 
 export interface mockSpellsTreeTableData {
   id: string,
@@ -59,7 +62,7 @@ export interface mockBookTreeTableData {
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [NgIf, HttpClientModule, NgxDatatableModule],
+  imports: [NgIf, HttpClientModule, NgxDatatableModule, TableSpinnerComponent, TableNestedComponent],
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
@@ -114,9 +117,9 @@ export class AppComponent {
     console.log(res, 'quiero edit');
   }
 
-  currentTheme: OpTreeThemeEnum = OpTreeThemeEnum.dark;
-  treeThemeEnum = OpTreeThemeEnum;
-  setCurrentTheme(param: OpTreeThemeEnum) {
+  currentTheme: TableNestedThemeEnum = TableNestedThemeEnum.dark;
+  treeThemeEnum = TableNestedThemeEnum;
+  setCurrentTheme(param: TableNestedThemeEnum) {
     this.currentTheme = param
   }
 
