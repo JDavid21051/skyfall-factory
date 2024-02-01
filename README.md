@@ -2,7 +2,7 @@
   <a href="https://github.com/JDavid21051/skyfall-factory">
 
 [![My Skills](https://skillicons.dev/icons?i=angular&theme=light)](https://skillicons.dev)
-NGX Hefesto
+Ngx Table Nested
 
   </a>
 </h1>
@@ -15,7 +15,7 @@ NGX Hefesto
 - [License](#-license)
 
 ## 📋 Description
-La librería ngx-hefesto proporciona una poderosa tabla anidada con capacidad para colapsar las filas para mostrar una segunda tabla con una configuración de columnas diferentes al padre. Permite crear interfaces de usuario flexibles y organizadas para mostrar datos jerárquicos y con estructuras definidas.
+La librería ngx-table-nested proporciona una poderosa tabla anidada con capacidad para colapsar las filas para mostrar una segunda tabla con una configuración de columnas diferentes al padre. Permite crear interfaces de usuario flexibles y organizadas para mostrar datos jerárquicos y con estructuras definidas.
 
 
 ## Feature
@@ -72,13 +72,13 @@ npm install
 #### Compile library
 
 ```bash 
-ng build ngx-hefesto 
+ng build ngx-table-nested 
 ```
 
 #### Generate installer
 
 ```bash 
-npm pack ngx-hefesto 
+npm pack ngx-table-nested 
 ```
 
 ## 📄 License

@@ -39,7 +39,7 @@ jobs:
 
     - name: Build library
       run: |
-        ng build ngx-hefesto
+        ng build ngx-table-nested
 
 
   publish:
@@ -48,7 +48,7 @@ jobs:
     steps:
       - name: Move to folder
         run: |
-          cd ./dist/ngx-hefesto
+          cd ./dist/ngx-table-nested
 
       - name: publish lib
         run: |

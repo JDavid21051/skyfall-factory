@@ -2,38 +2,56 @@
   <a href="https://github.com/JDavid21051/skyfall-factory">
 
 [![My Skills](https://skillicons.dev/icons?i=angular&theme=light)](https://skillicons.dev)
-Hefesto
+Ngx Table Nested
 
   </a>
 </h1>
 
-## Contents
+## Content
 
 - [Description](#-description)
 - [Requirements](#-requirements)
 - [Manage this Angular lib](#-building)
 - [License](#-license)
 
-
 ## 📋 Description
+La librería ngx-table-nested proporciona una poderosa tabla anidada con capacidad para colapsar las filas para mostrar una segunda tabla con una configuración de columnas diferentes al padre. Permite crear interfaces de usuario flexibles y organizadas para mostrar datos jerárquicos y con estructuras definidas.
 
-La librería ngx-hefesto proporciona una poderosa tabla anidada con capacidad para colapsar las filas para mostrar una segunda tabla con una configuración de columnas diferentes al padre. Permite crear interfaces de usuario flexibles y organizadas para mostrar datos jerárquicos y con estructuras definidas.
+
+## Feature
+
+### API
+properties ables in Table-nested
+
+#### Inputs
+
+| Input           | Default      | Type         | Description                             |
+|-----------------|--------------|--------------|-----------------------------------------|
+| dataTable       | []           | T            | Generic type recived from the component |
+| columns         | Content Cell | Content Cell |
+| limit           | 10           | Content Cell |
+| childrenColumns | []           | Content Cell |
+| childrenLimit   | 3            | Content Cell |
+| childrenKey     | Empty        | Content Cell |
+| actionConfig    | []           | Content Cell |
+| theme    | 'light'      | Content Cell |
+
 
 ## 📖 Requirements
 
-- [Nodejs => v18.x][node]
+- [Nodejs >= v18.x][node]
 
 ```bash 
 brew install node 
 ```
 
-- [@angular/cli => V13.2.x][angular]
+- [@angular/cli >= V13.2.x][angular]
 
 ```bash 
 npm install -g @angular/cli 
 ```
 
-- [@swimlane/ngx-data => V20.xx][dateTable]
+- [@swimlane/ngx-data >= V20.xx][dateTable]
 
 ```bash 
 npm install @swimlane/ngx-datatable 
@@ -45,24 +63,23 @@ npm install @swimlane/ngx-datatable
 
 ## 🚀 Building
 
-1. Install dependencies
+#### Install dependencies
 
 ```bash 
 npm install 
 ```
 
-2. Compile library
+#### Compile library
 
 ```bash 
-ng build ngx-hefesto 
+ng build ngx-table-nested 
 ```
 
-2. Generate installer
+#### Generate installer
 
 ```bash 
-npm pack ngx-hefesto 
+npm pack ngx-table-nested 
 ```
-
 
 ## 📄 License
 
