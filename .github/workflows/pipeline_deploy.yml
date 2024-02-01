@@ -39,7 +39,7 @@ jobs:
 
       - name: publish lib
         run: |
-          npm publish --access public
+          npm publish ngx-table-nested --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
