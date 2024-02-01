@@ -1,4 +1,4 @@
-name: NodeJS with Webpack
+name: Publish ngx-table-nested library
 
 on:
   push:
@@ -7,8 +7,7 @@ on:
     branches: [ "stage" ]
 
 jobs:
-
-  checkout:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,36 +15,22 @@ jobs:
         with:
           fetch-depth: 0
 
-  nodeAndAngular:
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Use Node.js v18
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+      - name: Install dependencies
+        run: |
+          npm install --no-optional
 
-  build:
-    runs-on: ubuntu-latest
+      - name: Install angular cli
+        run: |
+          npm install -g @angular/cli
 
-    steps:
-    - name: Install dependencies
-      run: |
-        npm install --no-optional
+      - name: Build library
+        run: |
+          ng build ngx-table-nested
 
-    - name: Install angular cli
-      run: |
-        npm install -g @angular/cli
-
-    - name: Build library
-      run: |
-        ng build ngx-table-nested
-
-
-  publish:
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Move to folder
         run: |
           cd ./dist/ngx-table-nested
