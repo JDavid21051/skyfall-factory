@@ -36,14 +36,3 @@ jobs:
       - name: Move to folder
         run: |
           cd ./dist/ngx-table-nested
-
-      - name: Run ci lib
-        run: |
-          npm ci
-
-      - name: Publish to npm
-        run: |
-          echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > ~/.npmrc
-          npm publish
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
