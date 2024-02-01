@@ -7,7 +7,7 @@ import {
   TABLE_COLUMN_ICON_WIDTH,
   TABLE_ROW_HEIGHT,
   TABLE_CHILDREN_ROW_HEIGHT,
-  TABLE_CHILDREN_ROW_OFFSET
+  TABLE_CHILDREN_ROW_OFFSET, TABLE_FOOTER_HEIGHT
 } from '../../constants/default-config-table.const';
 import {
   ActionConfigInterface,
@@ -15,11 +15,12 @@ import {
   TreeNestedColumnInterface
 } from '../../interfaces/tree-nested.models';
 import {TableBasicComponent} from '../table-basic/table-basic.component';
+import {TableActionButtonComponent} from '../table-action-button/table-action-button.component';
 
 @Component({
   selector: 'ngx-table-nested',
   standalone: true,
-  imports: [NgForOf, NgIf, NgClass, NgxDatatableModule, TableBasicComponent],
+  imports: [NgForOf, NgIf, NgClass, NgxDatatableModule, TableBasicComponent, TableActionButtonComponent],
   templateUrl: './table-nested.component.html'
 })
 export class TableNestedComponent<T> {
@@ -60,6 +61,7 @@ export class TableNestedComponent<T> {
 
   iconColumnWidth = TABLE_COLUMN_ICON_WIDTH;
   tableRowHeight = TABLE_ROW_HEIGHT;
+  tableFooterHeight = TABLE_FOOTER_HEIGHT;
   childrenRowHeight = TABLE_CHILDREN_ROW_HEIGHT;
   childrenRowOff = TABLE_CHILDREN_ROW_OFFSET;
 

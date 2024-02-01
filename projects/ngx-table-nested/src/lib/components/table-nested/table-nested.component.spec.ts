@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TableNestedComponent } from './table-nested.component';
 
 describe('TableNestedComponent', () => {
-  let component: TableNestedComponent;
-  let fixture: ComponentFixture<TableNestedComponent>;
+  let component = new TableNestedComponent<any>();
+  let fixture: ComponentFixture<TableNestedComponent<any>>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

@@ -5,10 +5,15 @@ import {NgIf} from '@angular/common';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {
   TableNestedComponent,
+
+  TableSpinnerComponent
+} from '../../../ngx-table-nested/src/lib/components';
+
+import {
   TableNestedThemeEnum,
   ActionTypeEnum,
-  TableSpinnerComponent
-} from 'ngx-table-nested';
+} from '../../../ngx-table-nested/src/lib/interfaces/tree-nested.models';
+import {TableBasicComponent} from 'ngx-table-nested';
 
 export interface mockSpellsTreeTableData {
   id: string,
@@ -62,7 +67,7 @@ export interface mockBookTreeTableData {
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [NgIf, HttpClientModule, NgxDatatableModule, TableSpinnerComponent, TableNestedComponent],
+  imports: [NgIf, HttpClientModule, NgxDatatableModule, TableBasicComponent, TableNestedComponent],
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
@@ -109,19 +114,8 @@ export class AppComponent {
     },
   ]
 
-  clickCreate(res: any) {
-    console.log(res, 'quiero crear');
-  }
-
-  clickEdit(res: any) {
-    console.log(res, 'quiero edit');
-  }
-
   currentTheme: TableNestedThemeEnum = TableNestedThemeEnum.dark;
   treeThemeEnum = TableNestedThemeEnum;
-  setCurrentTheme(param: TableNestedThemeEnum) {
-    this.currentTheme = param
-  }
 
   constructor() {
     this.spellMockData$$.subscribe({
@@ -136,4 +130,17 @@ export class AppComponent {
       }
     })
   }
+
+  clickCreate(res: any) {
+    console.log(res, 'quiero crear');
+  }
+
+  clickEdit(res: any) {
+    console.log(res, 'quiero edit');
+  }
+
+  setCurrentTheme(param: TableNestedThemeEnum) {
+    this.currentTheme = param
+  }
+
 }
