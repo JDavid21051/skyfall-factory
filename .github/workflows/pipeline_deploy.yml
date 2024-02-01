@@ -7,7 +7,7 @@ on:
     branches: [ "stage" ]
 
 jobs:
-  build:
+  PublishLib:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,6 +19,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+
       - name: Install dependencies
         run: |
           npm install --no-optional
@@ -38,4 +40,6 @@ jobs:
       - name: publish lib
         run: |
           npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
