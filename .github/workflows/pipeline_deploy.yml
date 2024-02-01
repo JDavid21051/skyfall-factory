@@ -37,8 +37,13 @@ jobs:
         run: |
           cd ./dist/ngx-table-nested
 
+      - name: Run ci lib
+        run: |
+          npm ci
+
       - name: publish lib
         run: |
+          npm ci
           npm publish ngx-table-nested --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
