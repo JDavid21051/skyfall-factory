@@ -16,16 +16,15 @@ export interface TreeNestedColumnInterface {
 }
 
 export interface ActionConfigInterface {
-  type: ActionTypeEnum,
   label: string,
   icon: {
     icon: string,
     pack: string
   },
+  class: string,
   tooltip: string,
   click: Function
 }
-
 
 export interface TreeNestedDataInterface<T> {
   dataTable: T[],

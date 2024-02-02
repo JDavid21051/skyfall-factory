@@ -10,18 +10,20 @@ import {
   TABLE_CHILDREN_ROW_OFFSET, TABLE_FOOTER_HEIGHT
 } from '../../constants/default-config-table.const';
 import {
-  ActionConfigInterface,
+  ActionConfigInterface, ActionTypeEnum,
   TableNestedThemeEnum,
   TreeNestedColumnInterface
 } from '../../interfaces/tree-nested.models';
 import {TableBasicComponent} from '../table-basic/table-basic.component';
 import {TableActionButtonComponent} from '../table-action-button/table-action-button.component';
+import {TableActionFactoryComponent} from '../table-action-factory/table-action-factory.component';
 
 @Component({
   selector: 'ngx-table-nested',
   standalone: true,
-  imports: [NgForOf, NgIf, NgClass, NgxDatatableModule, TableBasicComponent, TableActionButtonComponent],
-  templateUrl: './table-nested.component.html'
+  imports: [NgForOf, NgIf, NgClass, NgxDatatableModule, TableBasicComponent, TableActionButtonComponent, TableActionFactoryComponent],
+  templateUrl: './table-nested.component.html',
+  styleUrls: ['../styles.scss' ]
 })
 export class TableNestedComponent<T> {
   @ViewChild('treeTable') table!: DatatableComponent;
@@ -53,42 +55,44 @@ export class TableNestedComponent<T> {
   @Input()
   childrenActionConfig: ActionConfigInterface[] = [];
 
-
-  tableTheme = TableNestedThemeEnum;
   columnMode = ColumnMode;
   sortType = SortType;
-  childrenTableLength = 3;
-  currentRowExpanded: any;
+  tableTheme = TableNestedThemeEnum;
+  actionType = ActionTypeEnum;
+
+  tableRowsCount = TABLE_CHILDREN_LIMIT;
+  tableRowExpanded: any;
 
   iconColumnWidth = TABLE_COLUMN_ICON_WIDTH;
   tableRowHeight = TABLE_ROW_HEIGHT;
   tableFooterHeight = TABLE_FOOTER_HEIGHT;
   childrenRowHeight = TABLE_CHILDREN_ROW_HEIGHT;
   childrenRowOff = TABLE_CHILDREN_ROW_OFFSET;
-
+  CERO = 0;
 
   toggleExpandRow(row: any) {
-    if (this.currentRowExpanded) {
-      this.table.rowDetail.toggleExpandRow(this.currentRowExpanded);
+    if (this.tableRowExpanded) {
+      this.table.rowDetail.toggleExpandRow(this.tableRowExpanded);
     }
 
-    if (this.currentRowExpanded !== row) {
+    if (this.tableRowExpanded !== row) {
       this.table.rowDetail.toggleExpandRow(row);
-      this.currentRowExpanded = row;
+      this.tableRowExpanded = row;
     } else {
-      this.currentRowExpanded = undefined;
+      this.tableRowExpanded = undefined;
     }
 
-    this.childrenTableLength = row[this.childrenKey].length;
+    this.tableRowsCount = row[this.childrenKey].length;
   }
 
   getDetailHeight() {
-    return this.childrenRowOff + (this.childrenRowHeight * this.calcHeight());
+    return this.childrenRowOff + (this.tableRowsCount === this.CERO ? this.CERO : (this.childrenRowHeight * this.calcRowCount()))
   }
 
-  calcHeight() {
-    const result = Math.floor(this.childrenTableLength / this.childrenLimit);
-    return this.childrenTableLength > 0 ? (result > 2 ? result : this.childrenLimit) : 1;
+  calcRowCount() {
+    if (this.tableRowsCount === this.CERO) return this.tableRowsCount;
+    if (this.tableRowsCount <= TABLE_CHILDREN_LIMIT) return this.tableRowsCount;
+    return TABLE_CHILDREN_LIMIT
   }
 
 }

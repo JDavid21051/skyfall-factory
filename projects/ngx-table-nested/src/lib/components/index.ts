@@ -8,5 +8,6 @@
  */
 
 export * from './table-basic/table-basic.component';
-export * from './table-spinner/table-spinner.component';
 export * from './table-nested/table-nested.component';
+export * from './table-action-button/table-action-button.component';
+export * from './table-action-button-icon/table-action-button-icon.component';

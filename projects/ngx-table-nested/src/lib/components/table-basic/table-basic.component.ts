@@ -1,13 +1,14 @@
 import {Component, Input} from '@angular/core';
-import {ActionConfigInterface, TreeNestedColumnInterface} from '../../interfaces/tree-nested.models';
+import {ActionConfigInterface, ActionTypeEnum, TreeNestedColumnInterface} from '../../interfaces/tree-nested.models';
 import {ColumnMode, NgxDatatableModule, SortType} from '@swimlane/ngx-datatable';
 import {NgFor, NgIf} from '@angular/common';
 import {TableActionButtonComponent} from '../table-action-button/table-action-button.component';
+import {TableActionFactoryComponent} from '../table-action-factory/table-action-factory.component';
 
 @Component({
   selector: 'ngx-table-basic',
   standalone: true,
-  imports: [NgIf, NgFor, NgxDatatableModule, TableActionButtonComponent],
+  imports: [NgIf, NgFor, NgxDatatableModule, TableActionButtonComponent, TableActionFactoryComponent],
   template: `
     <ngx-datatable *ngIf="rows.length > 0 else noData" class="bootstrap"
                    rowHeight="auto"
@@ -42,15 +43,18 @@ import {TableActionButtonComponent} from '../table-action-button/table-action-bu
         </ng-template>
         <ng-template let-dataItem="row" ngx-datatable-cell-template>
           <ng-container *ngFor="let action of actionConfig">
-            <ngx-table-action-button [data]="action" />
+            <ngx-table-action-factory [data]="action" [type]="actionType.icon" />
           </ng-container>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>
     <ng-template #noData>
-      No se encontraron datos
+      <div class="table-alert-warning">
+        No se encontraron datos para mostrar
+      </div>
     </ng-template>
-  `
+  `,
+  styleUrls: ['../styles.scss' ]
 })
 export class TableBasicComponent<T> {
   @Input()
@@ -71,4 +75,5 @@ export class TableBasicComponent<T> {
   @Input()
   columnMode: ColumnMode = ColumnMode.force;
 
+  protected readonly actionType = ActionTypeEnum;
 }

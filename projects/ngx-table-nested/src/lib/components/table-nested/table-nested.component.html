@@ -55,6 +55,7 @@
         padding-top: 8px;
         padding-bottom: 8px;
       }
+
     }
   }
 
@@ -81,7 +82,6 @@
     justify-content: center;
     line-height: 1;
     margin: 0;
-    outline: none;
     padding: 0.3rem;
     text-decoration: none;
     transition: box-shadow .2s, -webkit-box-shadow .2s;
@@ -146,7 +146,7 @@
         <ng-template let-dataItem="row" ngx-datatable-cell-template class="agregada_en_template">
           <!--        <ng-template [ngTemplateOutlet]="actionTemplate"></ng-template>-->
           <ng-container *ngFor="let action of actionConfig">
-            <ngx-table-action-button [data]="action" />
+            <ngx-table-action-factory [data]="action" [type]="actionType.icon" />
           </ng-container>
         </ng-template>
       </ngx-datatable-column>

@@ -1,22 +1,22 @@
 import {Component, Input} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {NgIf} from '@angular/common';
 import {ActionConfigInterface} from '../../interfaces/tree-nested.models';
 
 @Component({
-  selector: 'ngx-table-button',
+  selector: 'ngx-table-button-icon',
   standalone: true,
   imports: [NgIf],
   template: `
     <button *ngIf="data" class="button_link" [title]="data.tooltip" (click)="data.click(data)">
-      {{ data.label }}
-      <span class="material-symbols-outlined">
-          {{ data.icon.icon }}
-        </span>
+            <span class="material-symbols-outlined">
+              {{ data.icon.icon }}
+            </span>
     </button>
   `,
   styleUrls: ['../styles.scss' ]
 })
-export class TableActionButtonComponent {
+export class TableActionButtonIconComponent {
   @Input()
   data!: ActionConfigInterface;
 }

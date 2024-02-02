@@ -4,9 +4,7 @@ import {Observable} from 'rxjs';
 import {NgIf} from '@angular/common';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {
-  TableNestedComponent,
-
-  TableSpinnerComponent
+  TableNestedComponent
 } from '../../../ngx-table-nested/src/lib/components';
 
 import {
@@ -71,7 +69,7 @@ export interface mockBookTreeTableData {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  private readonly http = inject(HttpClient)
+  private readonly http = inject(HttpClient);
   spellMockData$$: Observable<mockSpellsTreeTableData[]> = this.http.get<mockSpellsTreeTableData[]>('../../../assets/mock/alternative.json');
   spellMockData?: mockSpellsTreeTableData[];
 
@@ -89,64 +87,64 @@ export class AppComponent {
   childrenColumns = [
     {name: 'Nombre', keyValue: 'name'},
     {name: 'Id', keyValue: 'id'}
-  ]
+  ];
 
   config = [
     {
-      type: ActionTypeEnum.icon,
       label: 'Editar',
       icon: {
         icon: 'edit',
         pack: 'far'
       },
       tooltip: 'Editar',
+      class: 'btn',
       click: this.clickEdit
     },
     {
-      type: ActionTypeEnum.icon,
       label: 'Crear',
       icon: {
         icon: 'add',
         pack: 'far'
       },
+      class: 'btn',
       tooltip: 'Crear',
       click: this.clickCreate
-    },
-  ]
+    }
+  ];
 
 
   childrenConfig: ActionConfigInterface[] = [
     {
-      type: ActionTypeEnum.icon,
       label: 'Editar',
       icon: {
         icon: 'edit',
         pack: 'far'
       },
       tooltip: 'Editar',
+      class: 'btn-info',
       click: this.clickEdit
     },
     {
-      type: ActionTypeEnum.icon,
       label: 'Crear',
       icon: {
         icon: 'add',
         pack: 'far'
       },
       tooltip: 'Crear',
+      class: 'btn-info',
       click: this.clickCreate
     },
     {
-      type: ActionTypeEnum.icon,
       label: 'Eliminar',
       icon: {
         icon: 'delete',
         pack: 'far'
       },
       tooltip: 'Eliminar',
+      class: 'btn-info',
       click: this.clickCreate
-    },
-  ]
+    }
+  ];
 
   currentTheme: TableNestedThemeEnum = TableNestedThemeEnum.dark;
   treeThemeEnum = TableNestedThemeEnum;
@@ -156,13 +154,13 @@ export class AppComponent {
       next: (response) => {
         this.spellMockData = response;
       }
-    })
+    });
 
     this.bookListData$$.subscribe({
       next: (response) => {
         this.bookListData = response;
       }
-    })
+    });
   }
 
   clickCreate(res: any) {
@@ -174,7 +172,7 @@ export class AppComponent {
   }
 
   setCurrentTheme(param: TableNestedThemeEnum) {
-    this.currentTheme = param
+    this.currentTheme = param;
   }
 
 }
