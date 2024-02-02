@@ -1,8 +1,10 @@
-<h1 align="center">
+<h1 style="display: flex; align-items: center; justify-content:center; gap: 16px">
   <a href="https://github.com/JDavid21051/skyfall-factory">
 
-[![My Skills](https://skillicons.dev/icons?i=angular&theme=light)](https://skillicons.dev)
-Ngx Table Nested
+[![My Skills](https://skillicons.dev/icons?i=angular&theme=light)](https://angular.io)
+
+
+<span style="display: inline-flex"> Ngx Table Nested  </span>
 
   </a>
 </h1>
@@ -15,8 +17,9 @@ Ngx Table Nested
 - [License](#-license)
 
 ## 📋 Description
-La librería ngx-table-nested proporciona una poderosa tabla anidada con capacidad para colapsar las filas para mostrar una segunda tabla con una configuración de columnas diferentes al padre. Permite crear interfaces de usuario flexibles y organizadas para mostrar datos jerárquicos y con estructuras definidas.
-
+The ngx-table-nested library provides a powerful nested table with the ability to collapse
+rows to display a second table with a different column configuration than the parent.
+It allows you to create flexible and organised user interfaces to display hierarchical and structured data.
 
 ## Feature
 

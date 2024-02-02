@@ -51,7 +51,8 @@ export class TableNestedComponent<T> {
   actionConfig: ActionConfigInterface[] = [];
 
   @Input()
-  withActions= false;
+  childrenActionConfig: ActionConfigInterface[] = [];
+
 
   tableTheme = TableNestedThemeEnum;
   columnMode = ColumnMode;

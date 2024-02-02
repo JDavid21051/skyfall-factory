@@ -11,13 +11,13 @@
   </div>
 
   <ngx-table-nested *ngIf="spellMockData"
-                           [theme]="currentTheme"
-                           [dataTable]="spellMockData"
-                           [columns]="parentColumns"
-                           [childrenKey]="'ingredients'"
-                           [withActions]="true"
-                           [childrenColumns]="childrenColumns"
-                           [actionConfig]="config"
+                    [theme]="currentTheme"
+                    [dataTable]="spellMockData"
+                    [columns]="parentColumns"
+                    [childrenKey]="'ingredients'"
+                    [childrenColumns]="childrenColumns"
+                    [actionConfig]="config"
+                    [childrenActionConfig]="childrenConfig"
   />
 
 </div>

@@ -63,6 +63,10 @@
     padding-bottom: 0.5rem !important;
   }
 
+  .p-3 {
+    padding: 1rem;
+  }
+
   .op_button_icon {
     align-items: center;
     background-color: #fff;
@@ -104,9 +108,9 @@
                  [sortType]="sortType.single"
                  [limit]="limit"
   >
-    <ngx-datatable-row-detail [rowHeight]="getDetailHeight()" style="padding: 1rem">
+    <ngx-datatable-row-detail [rowHeight]="getDetailHeight()" class="p-3">
       <ng-template let-row="row" ngx-datatable-row-detail-template>
-        <ngx-table-basic [rows]="row[childrenKey]" [columns]="childrenColumns" [limit]="childrenLimit"/>
+        <ngx-table-basic [rows]="row[childrenKey]" [columns]="childrenColumns" [limit]="childrenLimit" [actionConfig]="childrenActionConfig"/>
       </ng-template>
     </ngx-datatable-row-detail>
     <ngx-datatable-column
@@ -117,9 +121,7 @@
       [canAutoResize]="false"
       cellClass="icon_content_cell"
       [cellTemplate]="iconCollapse"
-    >
-
-    </ngx-datatable-column>
+    />
     <ng-container>
       <ngx-datatable-column *ngFor="let item  of columns" [name]="item.name" [prop]="item.keyValue" [resizeable]="false"
                             [flexGrow]="1"
@@ -133,7 +135,7 @@
           <span> {{ dataItem[item.keyValue] }}</span>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column *ngIf="withActions && actionConfig.length > 0" name="'action'" prop="action"
+      <ngx-datatable-column *ngIf="actionConfig.length > 0" name="'action'" prop="action"
                             [resizeable]="false" [flexGrow]="1"
                             [sortable]="false"
                             headerClass="py-2"

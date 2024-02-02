@@ -1,12 +1,13 @@
 import {Component, Input} from '@angular/core';
-import {TreeNestedColumnInterface} from '../../interfaces/tree-nested.models';
+import {ActionConfigInterface, TreeNestedColumnInterface} from '../../interfaces/tree-nested.models';
 import {ColumnMode, NgxDatatableModule, SortType} from '@swimlane/ngx-datatable';
 import {NgFor, NgIf} from '@angular/common';
+import {TableActionButtonComponent} from '../table-action-button/table-action-button.component';
 
 @Component({
   selector: 'ngx-table-basic',
   standalone: true,
-  imports: [NgIf, NgFor, NgxDatatableModule],
+  imports: [NgIf, NgFor, NgxDatatableModule, TableActionButtonComponent],
   template: `
     <ngx-datatable *ngIf="rows.length > 0 else noData" class="bootstrap"
                    rowHeight="auto"
@@ -31,6 +32,20 @@ import {NgFor, NgIf} from '@angular/common';
           </ng-template>
         </ngx-datatable-column>
       </ng-container>
+      <ngx-datatable-column *ngIf="actionConfig.length > 0" name="'Acciones'" prop="Acciones"
+                            [resizeable]="false" [flexGrow]="1"
+                            [sortable]="false"
+                            headerClass="py-2 children_header"
+                            cellClass="py-2 children_row">
+        <ng-template ngx-datatable-header-template>
+          <span> Acciones</span>
+        </ng-template>
+        <ng-template let-dataItem="row" ngx-datatable-cell-template>
+          <ng-container *ngFor="let action of actionConfig">
+            <ngx-table-action-button [data]="action" />
+          </ng-container>
+        </ng-template>
+      </ngx-datatable-column>
     </ngx-datatable>
     <ng-template #noData>
       No se encontraron datos
@@ -46,6 +61,9 @@ export class TableBasicComponent<T> {
 
   @Input()
   limit = 3;
+
+  @Input()
+  actionConfig: ActionConfigInterface[] = [];
 
   @Input()
   sortType: SortType = SortType.single;

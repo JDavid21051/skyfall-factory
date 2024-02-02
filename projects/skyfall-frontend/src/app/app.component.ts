@@ -11,7 +11,7 @@ import {
 
 import {
   TableNestedThemeEnum,
-  ActionTypeEnum,
+  ActionTypeEnum, ActionConfigInterface
 } from '../../../ngx-table-nested/src/lib/interfaces/tree-nested.models';
 import {TableBasicComponent} from 'ngx-table-nested';
 
@@ -110,6 +110,40 @@ export class AppComponent {
         pack: 'far'
       },
       tooltip: 'Crear',
+      click: this.clickCreate
+    },
+  ]
+
+
+  childrenConfig: ActionConfigInterface[] = [
+    {
+      type: ActionTypeEnum.icon,
+      label: 'Editar',
+      icon: {
+        icon: 'edit',
+        pack: 'far'
+      },
+      tooltip: 'Editar',
+      click: this.clickEdit
+    },
+    {
+      type: ActionTypeEnum.icon,
+      label: 'Crear',
+      icon: {
+        icon: 'add',
+        pack: 'far'
+      },
+      tooltip: 'Crear',
+      click: this.clickCreate
+    },
+    {
+      type: ActionTypeEnum.icon,
+      label: 'Eliminar',
+      icon: {
+        icon: 'delete',
+        pack: 'far'
+      },
+      tooltip: 'Eliminar',
       click: this.clickCreate
     },
   ]
