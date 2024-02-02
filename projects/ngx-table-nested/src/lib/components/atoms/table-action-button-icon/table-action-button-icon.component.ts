@@ -1,7 +1,6 @@
 import {Component, Input} from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {NgIf} from '@angular/common';
-import {ActionConfigInterface} from '../../interfaces/tree-nested.models';
+import {ActionConfigInterface} from '../../../interfaces/tree-nested.models';
 
 @Component({
   selector: 'ngx-table-button-icon',
@@ -14,9 +13,9 @@ import {ActionConfigInterface} from '../../interfaces/tree-nested.models';
             </span>
     </button>
   `,
-  styleUrls: ['../styles.scss' ]
+  styleUrls: ['../../styles.scss']
 })
 export class TableActionButtonIconComponent {
   @Input()
-  data!: ActionConfigInterface;
+  data: ActionConfigInterface | undefined = undefined;
 }

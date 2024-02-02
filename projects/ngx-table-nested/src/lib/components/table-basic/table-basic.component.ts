@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {ActionConfigInterface, ActionTypeEnum, TreeNestedColumnInterface} from '../../interfaces/tree-nested.models';
 import {ColumnMode, NgxDatatableModule, SortType} from '@swimlane/ngx-datatable';
 import {NgFor, NgIf} from '@angular/common';
-import {TableActionButtonComponent} from '../table-action-button/table-action-button.component';
+import {TableActionButtonComponent} from '../atoms/table-action-button/table-action-button.component';
 import {TableActionFactoryComponent} from '../table-action-factory/table-action-factory.component';
 
 @Component({
@@ -43,7 +43,7 @@ import {TableActionFactoryComponent} from '../table-action-factory/table-action-
         </ng-template>
         <ng-template let-dataItem="row" ngx-datatable-cell-template>
           <ng-container *ngFor="let action of actionConfig">
-            <ngx-table-action-factory [data]="action" [type]="actionType.icon" />
+            <ngx-table-action-factory [data]="action" [type]="actionType.icon"/>
           </ng-container>
         </ng-template>
       </ngx-datatable-column>
@@ -54,7 +54,7 @@ import {TableActionFactoryComponent} from '../table-action-factory/table-action-
       </div>
     </ng-template>
   `,
-  styleUrls: ['../styles.scss' ]
+  styleUrls: ['../styles.scss']
 })
 export class TableBasicComponent<T> {
   @Input()

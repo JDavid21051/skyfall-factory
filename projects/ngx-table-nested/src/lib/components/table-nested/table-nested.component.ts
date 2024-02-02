@@ -15,7 +15,7 @@ import {
   TreeNestedColumnInterface
 } from '../../interfaces/tree-nested.models';
 import {TableBasicComponent} from '../table-basic/table-basic.component';
-import {TableActionButtonComponent} from '../table-action-button/table-action-button.component';
+import {TableActionButtonComponent} from '../atoms/table-action-button/table-action-button.component';
 import {TableActionFactoryComponent} from '../table-action-factory/table-action-factory.component';
 
 @Component({
@@ -23,7 +23,7 @@ import {TableActionFactoryComponent} from '../table-action-factory/table-action-
   standalone: true,
   imports: [NgForOf, NgIf, NgClass, NgxDatatableModule, TableBasicComponent, TableActionButtonComponent, TableActionFactoryComponent],
   templateUrl: './table-nested.component.html',
-  styleUrls: ['../styles.scss' ]
+  styleUrls: ['../styles.scss']
 })
 export class TableNestedComponent<T> {
   @ViewChild('treeTable') table!: DatatableComponent;
@@ -86,13 +86,13 @@ export class TableNestedComponent<T> {
   }
 
   getDetailHeight() {
-    return this.childrenRowOff + (this.tableRowsCount === this.CERO ? this.CERO : (this.childrenRowHeight * this.calcRowCount()))
+    return this.childrenRowOff + (this.tableRowsCount === this.CERO ? this.CERO : (this.childrenRowHeight * this.calcRowCount()));
   }
 
   calcRowCount() {
     if (this.tableRowsCount === this.CERO) return this.tableRowsCount;
     if (this.tableRowsCount <= TABLE_CHILDREN_LIMIT) return this.tableRowsCount;
-    return TABLE_CHILDREN_LIMIT
+    return TABLE_CHILDREN_LIMIT;
   }
 
 }

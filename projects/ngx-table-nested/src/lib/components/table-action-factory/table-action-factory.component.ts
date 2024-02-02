@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {ActionConfigInterface, ActionTypeEnum} from '../../interfaces/tree-nested.models';
-import {TableActionButtonComponent} from '../table-action-button/table-action-button.component';
-import {TableActionButtonIconComponent} from '../table-action-button-icon/table-action-button-icon.component';
+import {TableActionButtonComponent} from '../atoms/table-action-button/table-action-button.component';
+import {TableActionButtonIconComponent} from '../atoms/table-action-button-icon/table-action-button-icon.component';
 import {NgIf} from '@angular/common';
 
 @Component({
@@ -13,19 +13,19 @@ import {NgIf} from '@angular/common';
     TableActionButtonIconComponent
   ],
   template: `
-    <ngx-table-button *ngIf="type === actionTypeEnum.button" [data]="data"/>
-    <ngx-table-button-icon *ngIf="type === actionTypeEnum.icon" [data]="data"/>
-  `,
-  styleUrls: ['./table-action-factory.component.css']
+    <ng-container *ngIf="data">
+      <ngx-table-button *ngIf="type === actionTypeEnum.button" [data]="data"/>
+      <ngx-table-button-icon *ngIf="type === actionTypeEnum.icon" [data]="data"/>
+    </ng-container>
+  `
 })
 export class TableActionFactoryComponent {
   @Input()
   type: ActionTypeEnum = ActionTypeEnum.icon;
 
   @Input()
-  data!: ActionConfigInterface;
+  data: ActionConfigInterface | undefined = undefined;
 
   actionTypeEnum = ActionTypeEnum;
-
 
 }

@@ -26,13 +26,23 @@ export interface ActionConfigInterface {
   click: Function
 }
 
-export interface TreeNestedDataInterface<T> {
-  dataTable: T[],
-  columns: TreeNestedColumnInterface[],
-  childrenColumns: TreeNestedColumnInterface[],
-  childrenKey: string,
-  childrenLimit: number;
+export interface TbNestedDataInterface {
+  children:  any
+}
+
+export interface TbNestedConfigInterface {
+  column: TreeNestedColumnInterface[],
   limit: number,
+  action: ActionConfigInterface[]
+}
+
+export interface TbNestedConfigChildrenCInterface extends TbNestedConfigInterface {
+  key: string;
+}
+
+export interface TableNestedInterface<T extends TbNestedDataInterface> {
+  dataTable: T[],
+  fatherConfig: TbNestedConfigInterface,
+  childrenConfig: TbNestedConfigChildrenCInterface,
   theme: TableNestedThemeEnum,
-  actionConfig: ActionConfigInterface[]
 }
