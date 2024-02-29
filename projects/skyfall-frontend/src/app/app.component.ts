@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {NgIf} from '@angular/common';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 
-import {TableNestedComponent, TableNestedThemeEnum, ActionConfigInterface} from 'ngx-table-nested';
+import {TableNestedComponent, TableNestedThemeEnum, ActionConfigInterface} from '@ngx-table/nested';
 
 export interface mockSpellsTreeTableData {
   id: string,
