@@ -12,8 +12,7 @@ import {ActionConfigInterface} from '../../../interfaces/tree-nested.models';
               {{ data.icon.icon }}
             </span>
     </button>
-  `,
-  styleUrls: ['../../styles.scss']
+  `
 })
 export class TableActionButtonIconComponent {
   @Input()

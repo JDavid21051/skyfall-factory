@@ -16,14 +16,13 @@ import {
 } from '../../interfaces/tree-nested.models';
 import {TableBasicComponent} from '../table-basic/table-basic.component';
 import {TableActionButtonComponent} from '../atoms/table-action-button/table-action-button.component';
-import {TableActionFactoryComponent} from '../table-action-factory/table-action-factory.component';
+import {TableActionComponent} from '../table-action/table-action.component';
 
 @Component({
   selector: 'ngx-table-nested',
   standalone: true,
-  imports: [NgForOf, NgIf, NgClass, NgxDatatableModule, TableBasicComponent, TableActionButtonComponent, TableActionFactoryComponent],
-  templateUrl: './table-nested.component.html',
-  styleUrls: ['../styles.scss']
+  imports: [NgForOf, NgIf, NgClass, NgxDatatableModule, TableBasicComponent, TableActionButtonComponent, TableActionComponent],
+  templateUrl: './table-nested.component.html'
 })
 export class TableNestedComponent<T> {
   @ViewChild('treeTable') table!: DatatableComponent;

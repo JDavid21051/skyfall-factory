@@ -3,39 +3,6 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-hefesto": {
-      "projectType": "library",
-      "root": "projects/ngx-hefesto",
-      "sourceRoot": "projects/ngx-hefesto/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/ngx-hefesto/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/ngx-hefesto/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/ngx-hefesto/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "tsConfig": "projects/ngx-hefesto/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
-          }
-        }
-      }
-    },
     "skyfall-frontend": {
       "projectType": "application",
       "schematics": {

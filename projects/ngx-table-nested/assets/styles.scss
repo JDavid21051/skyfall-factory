@@ -1,0 +1,190 @@
+/*
+ * Developed by CQ Inversiones SAS. Copyright ©. 2023 - 2024. All rights reserved.
+ * Desarrollado por CQ Inversiones SAS. Copyright ©. 2023 - 2024. Todos los derechos reservados.
+ */
+
+/*
+ * Project:      skyfall-factory
+ * Developed by: Juan David Pelaez Cumbe
+ * Date:         1/02/24 - 22:45
+ * Module name:  styles
+ * File name:    styles.scss
+ * IDE:          WebStorm
+ */
+
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Symbols Outlined Regular'),
+  url('https://fonts.gstatic.com/s/materialsymbolsoutlined/v22/kRv-TjpVLqJd5Zv-_s0vW_sJEk3q74A3jx51oJ1L3r0.woff2') format('woff2');
+}
+
+ngx-table-nested,
+ngx-table-action,
+ngx-table-button,
+ngx-table-button-icon,
+ngx-table-basic {
+  font-family: 'Material Symbols Outlined', sans-serif !important;
+}
+
+.ngx-datatable {
+  &.dark {
+    .op_button_icon:hover {
+      box-shadow: #eeeeee 0 0 8px -2px, transparent 0 0 0 0;
+    }
+  }
+
+  &.bootstrap {
+    .op_button_icon:hover {
+      box-shadow: #121212 0 0 8px -2px, transparent 0 0 0 0;
+    }
+  }
+
+  .ngx-datatable .datatable-body-cell, {
+
+  }
+  & .op_button_icon {
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: transparent 0 0 0 3px, rgba(18, 18, 18, .1) 0 6px 20px;
+    box-sizing: border-box;
+    color: #121212;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 1.2rem;
+    font-weight: 700;
+    justify-content: center;
+    line-height: 1;
+    margin: 0;
+    padding: 0.3rem;
+    text-decoration: none;
+    transition: box-shadow .2s, -webkit-box-shadow .2s;
+    white-space: nowrap;
+    border: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+
+
+  & .button_link {
+    border-radius: 4px;
+    border: 0;
+    padding: 0.2rem;
+    margin-right: .5rem;
+    cursor: pointer;
+    vertical-align: middle;
+    background: white;
+    display: inline-flex;
+    box-shadow: transparent 0 0 0 3px, rgba(18, 18, 18, .1) 0 6px 20px;
+
+    & span {
+      font-size: 20px !important;
+    }
+  }
+
+
+}
+
+.ngx-datatable .datatable-body .datatable-row-detail {
+  padding: 1rem;
+}
+
+.ngx-datatable .datatable-footer {
+  overflow-y: hidden !important;
+}
+
+.ngx-datatable.dark .datatable-body .datatable-body-row .datatable-body-cell,
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row .datatable-body-cell {
+  padding-top: 8px;
+  padding-bottom: 8px;
+
+  &.icon_content_cell {
+    display: grid !important;
+    place-content: center !important;
+    padding: 0 !important;
+  }
+
+  &.button-content {
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.ngx-datatable.dark .datatable-header .datatable-header-cell,
+.ngx-datatable.bootstrap .datatable-header .datatable-header-cell {
+  &.children_header {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: #d9d9d9;
+  }
+
+  &.children_row {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+}
+
+.py-2 {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+.p-3 {
+  padding: 1rem;
+}
+
+.op_button_icon {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: transparent 0 0 0 3px, rgba(18, 18, 18, .1) 0 6px 20px;
+  box-sizing: border-box;
+  color: #121212;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1.2rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  padding: 0.3rem;
+  text-decoration: none;
+  transition: box-shadow .2s, -webkit-box-shadow .2s;
+  white-space: nowrap;
+  border: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+
+.button_link {
+  border-radius: 4px;
+  border: 0;
+  padding: 0.2rem;
+  margin-right: .5rem;
+  cursor: pointer;
+  vertical-align: middle;
+  background: white;
+  display: inline-flex;
+  box-shadow: transparent 0 0 0 3px, rgba(18, 18, 18, .1) 0 6px 20px;
+
+  & span {
+    font-size: 20px !important;
+  }
+}
+
+.table-alert-warning {
+  background-color: #fffaeb;
+  color: #946c00;
+  padding: 1.25rem 2.5rem;
+  border-radius: 4px;
+  display: inline-grid;
+  font-size: 16px;
+}

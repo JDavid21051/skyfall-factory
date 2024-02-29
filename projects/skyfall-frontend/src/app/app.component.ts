@@ -3,15 +3,8 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {NgIf} from '@angular/common';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
-import {
-  TableNestedComponent
-} from '../../../ngx-table-nested/src/lib/components';
 
-import {
-  TableNestedThemeEnum,
-  ActionTypeEnum, ActionConfigInterface
-} from '../../../ngx-table-nested/src/lib/interfaces/tree-nested.models';
-import {TableBasicComponent} from 'ngx-table-nested';
+import {TableNestedComponent, TableNestedThemeEnum, ActionConfigInterface} from 'ngx-table-nested';
 
 export interface mockSpellsTreeTableData {
   id: string,
@@ -65,7 +58,7 @@ export interface mockBookTreeTableData {
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [NgIf, HttpClientModule, NgxDatatableModule, TableBasicComponent, TableNestedComponent],
+  imports: [NgIf, HttpClientModule, NgxDatatableModule, TableNestedComponent],
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
@@ -114,16 +107,6 @@ export class AppComponent {
 
 
   childrenConfig: ActionConfigInterface[] = [
-    {
-      label: 'Editar',
-      icon: {
-        icon: 'edit',
-        pack: 'far'
-      },
-      tooltip: 'Editar',
-      class: 'btn-info',
-      click: this.clickEdit
-    },
     {
       label: 'Crear',
       icon: {

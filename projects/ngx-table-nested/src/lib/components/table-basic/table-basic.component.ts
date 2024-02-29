@@ -3,12 +3,12 @@ import {ActionConfigInterface, ActionTypeEnum, TreeNestedColumnInterface} from '
 import {ColumnMode, NgxDatatableModule, SortType} from '@swimlane/ngx-datatable';
 import {NgFor, NgIf} from '@angular/common';
 import {TableActionButtonComponent} from '../atoms/table-action-button/table-action-button.component';
-import {TableActionFactoryComponent} from '../table-action-factory/table-action-factory.component';
+import {TableActionComponent} from '../table-action/table-action.component';
 
 @Component({
   selector: 'ngx-table-basic',
   standalone: true,
-  imports: [NgIf, NgFor, NgxDatatableModule, TableActionButtonComponent, TableActionFactoryComponent],
+  imports: [NgIf, NgFor, NgxDatatableModule, TableActionButtonComponent, TableActionComponent],
   template: `
     <ngx-datatable *ngIf="rows.length > 0 else noData" class="bootstrap"
                    rowHeight="auto"
@@ -43,7 +43,7 @@ import {TableActionFactoryComponent} from '../table-action-factory/table-action-
         </ng-template>
         <ng-template let-dataItem="row" ngx-datatable-cell-template>
           <ng-container *ngFor="let action of actionConfig">
-            <ngx-table-action-factory [data]="action" [type]="actionType.icon"/>
+            <ngx-table-action [data]="action" [type]="actionType.icon"/>
           </ng-container>
         </ng-template>
       </ngx-datatable-column>
@@ -53,8 +53,7 @@ import {TableActionFactoryComponent} from '../table-action-factory/table-action-
         No se encontraron datos para mostrar
       </div>
     </ng-template>
-  `,
-  styleUrls: ['../styles.scss']
+  `
 })
 export class TableBasicComponent<T> {
   @Input()

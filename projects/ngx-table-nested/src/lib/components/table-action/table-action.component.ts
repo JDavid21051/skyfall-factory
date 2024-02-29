@@ -5,7 +5,7 @@ import {TableActionButtonIconComponent} from '../atoms/table-action-button-icon/
 import {NgIf} from '@angular/common';
 
 @Component({
-  selector: 'ngx-table-action-factory',
+  selector: 'ngx-table-action',
   standalone: true,
   imports: [
     NgIf,
@@ -19,7 +19,7 @@ import {NgIf} from '@angular/common';
     </ng-container>
   `
 })
-export class TableActionFactoryComponent {
+export class TableActionComponent {
   @Input()
   type: ActionTypeEnum = ActionTypeEnum.icon;
 
