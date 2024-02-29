@@ -13,13 +13,81 @@
 
 - [Description](#-description)
 - [Requirements](#-requirements)
-- [Manage this Angular lib](#-building)
-- [License](#-license)
+- [Manage this Angular lib](#-building-v06)
 
 ## 📋 Description
-The ngx-table-nested library provides a powerful nested table with the ability to collapse
+The ngx-table-nested library provides a powerful nested table built on top of @swimlane/ngx-datatable with the ability to collapse
 rows to display a second table with a different column configuration than the parent.
 It allows you to create flexible and organised user interfaces to display hierarchical and structured data.
+
+## 📋 Usage
+Once you have installed ngx-table-nested, you can import it in your AppModule:
+```javascript 
+
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
+import { AppComponent } from './app.component';
+
+// Import your TableNestedComponent
+import { TableNestedComponent } from 'ngx-table-nested';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    // Specify TableNestedComponent as an import
+    TableNestedComponent
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+
+
+
+```
+#### Or you can import it in your AppComponent (for this example):
+```javascript
+import {Component, inject} from '@angular/core';
+import {NgxDatatableModule} from '@swimlane/ngx-datatable';
+import {TableNestedComponent} from '@ngx-table-nested';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  standalone: true,
+  imports: [TableNestedComponent],
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {}
+```
+
+#### Table
+
+##### TS
+
+```typescript
+const data = [];
+const columnConfig = [];
+const childrenColumnConfig = [];
+const actionConfig = [];
+const lightTheme = TableNestedThemeEnum.light;
+
+```
+##### HTML
+
+```text
+<ngx-table-nested *ngIf="data"
+    [theme]="lightTheme"
+    [dataTable]="data"
+    [columns]="columnConfig"
+    [childrenKey]="'ingredients'"
+    [childrenColumns]="childrenColumnConfig"
+    [actionConfig]="actionConfig"
+/>
+```
+
 
 ## Feature
 
@@ -28,16 +96,21 @@ properties ables in Table-nested
 
 #### Inputs
 
-| Input           | Default      | Type         | Description                             |
-|-----------------|--------------|--------------|-----------------------------------------|
-| dataTable       | []           | T            | Generic type recived from the component |
-| columns         | Content Cell | Content Cell |
-| limit           | 10           | Content Cell |
-| childrenColumns | []           | Content Cell |
-| childrenLimit   | 3            | Content Cell |
-| childrenKey     | Empty        | Content Cell |
-| actionConfig    | []           | Content Cell |
-| theme    | 'light'      | Content Cell |
+
+| Input           | Default    | Type          | Description                                  |
+|-----------------|------------|---------------|----------------------------------------------|
+| dataTable       | Empty      | T             | Generic type recived from the component      |
+| columns         | Content Cell | Content Cell  | List of columns to show in table             |
+| limit           | 10         | Content Cell  | Number of rows of show in the table          |
+| childrenColumns | Empty         | Content Cell  | List of columns to show in childtable        |
+| childrenLimit   | 3          | Content Cell  | Number of rows of show in the childrentable |
+| childrenKey     | Empty      | Content Cell  |
+| actionConfig    | Empty         | Content Cell  |
+| theme    | light      | Content Cell  | Theme of the aplication                      |
+
+
+
+#### Interface
 
 
 ## 📖 Requirements
@@ -64,9 +137,10 @@ npm install @swimlane/ngx-datatable
 [angular]: https://angular.io/cli
 [dateTable]: https://swimlane.gitbook.io/ngx-datatable/readme/installing
 
-## 🚀 Building
+## 🚀 Building v0.6
 
 #### Install dependencies
+generate installer file (.tgz) locally
 
 ```bash 
 npm install 
@@ -83,27 +157,3 @@ ng build ngx-table-nested
 ```bash 
 npm pack ngx-table-nested 
 ```
-
-## 📄 License
-
-MIT License
-
-Copyright (c) 2024 Juan David Pelaez
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.

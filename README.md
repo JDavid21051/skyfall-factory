@@ -37,8 +37,6 @@ import { TableNestedComponent } from 'ngx-table-nested';
   declarations: [AppComponent],
   imports: [
   BrowserModule,
-  // Specify NgxDatatableModule as an import
-  NgxDatatableModule,
   // Specify TableNestedComponent as an import
   TableNestedComponent
   ],
@@ -59,7 +57,7 @@ import {TableNestedComponent} from '@ngx-table-nested';
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [NgxDatatableModule, TableNestedComponent],
+  imports: [TableNestedComponent],
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {}
