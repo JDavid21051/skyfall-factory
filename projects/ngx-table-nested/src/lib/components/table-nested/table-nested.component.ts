@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {ColumnMode, DatatableComponent, NgxDatatableModule, SortType} from '@swimlane/ngx-datatable';
 import {
@@ -15,20 +15,41 @@ import {
   TreeNestedColumnInterface
 } from '../../interfaces/tree-nested.models';
 import {TableBasicComponent} from '../table-basic/table-basic.component';
-import {TableActionButtonComponent} from '../atoms/table-action-button/table-action-button.component';
-import {TableActionComponent} from '../table-action/table-action.component';
+import {TableStyleComponent} from '../atoms/table-style/table-style.component';
+import {TableButtonComponent, ButtonTypeEnum} from '../atoms/table-button/table-button.component';
+import {TableTagComponent} from '../atoms/table-tag/table-tag.component';
+
+export enum TableCellTypeEnum {
+  'text' = 'text',
+  'tag' = 'tag',
+  'image' = 'image',
+  'icon' = 'icon',
+}
+
+export interface DataTableNested<T> {
+  data: T,
+  column: {
+    keyValue: string,
+    name: string,
+    sort?: boolean,
+    type: TableCellTypeEnum,
+    header: string,
+  }
+}
 
 @Component({
   selector: 'ngx-table-nested',
   standalone: true,
-  imports: [NgForOf, NgIf, NgClass, NgxDatatableModule, TableBasicComponent, TableActionButtonComponent, TableActionComponent],
-  templateUrl: './table-nested.component.html'
+  imports: [NgForOf, NgIf, NgClass, NgxDatatableModule, TableBasicComponent, TableStyleComponent, TableButtonComponent, TableTagComponent],
+  templateUrl: './table-nested.component.html',
+  styleUrls: ['./table-nested.component.scss']
 })
 export class TableNestedComponent<T> {
   @ViewChild('treeTable') table!: DatatableComponent;
 
   @Input()
   dataTable: T[] = [];
+  // dataTable?: DataTableNested<T>;
 
   @Input()
   columns: TreeNestedColumnInterface[] = [];
@@ -54,6 +75,9 @@ export class TableNestedComponent<T> {
   @Input()
   childrenActionConfig: ActionConfigInterface[] = [];
 
+  @Output()
+  clickRow: EventEmitter<number> = new EventEmitter();
+
   columnMode = ColumnMode;
   sortType = SortType;
   tableTheme = TableNestedThemeEnum;
@@ -68,6 +92,7 @@ export class TableNestedComponent<T> {
   childrenRowHeight = TABLE_CHILDREN_ROW_HEIGHT;
   childrenRowOff = TABLE_CHILDREN_ROW_OFFSET;
   CERO = 0;
+  readonly buttonTypeEnum = ButtonTypeEnum;
 
   toggleExpandRow(row: any) {
     if (this.tableRowExpanded) {
@@ -92,6 +117,10 @@ export class TableNestedComponent<T> {
     if (this.tableRowsCount === this.CERO) return this.tableRowsCount;
     if (this.tableRowsCount <= TABLE_CHILDREN_LIMIT) return this.tableRowsCount;
     return TABLE_CHILDREN_LIMIT;
+  }
+
+  onClickRow(event: number) {
+    console.log(event);
   }
 
 }

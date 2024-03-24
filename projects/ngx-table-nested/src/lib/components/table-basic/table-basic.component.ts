@@ -1,21 +1,30 @@
-import {Component, Input} from '@angular/core';
-import {ActionConfigInterface, ActionTypeEnum, TreeNestedColumnInterface} from '../../interfaces/tree-nested.models';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {
+  ActionConfigInterface,
+  ActionTypeEnum,
+  TableNestedThemeEnum,
+  TreeNestedColumnInterface
+} from '../../interfaces/tree-nested.models';
 import {ColumnMode, NgxDatatableModule, SortType} from '@swimlane/ngx-datatable';
-import {NgFor, NgIf} from '@angular/common';
-import {TableActionButtonComponent} from '../atoms/table-action-button/table-action-button.component';
-import {TableActionComponent} from '../table-action/table-action.component';
+import {NgFor, NgIf, NgClass} from '@angular/common';
+import {TableButtonComponent} from '../atoms/table-button/table-button.component';
 
 @Component({
   selector: 'ngx-table-basic',
   standalone: true,
-  imports: [NgIf, NgFor, NgxDatatableModule, TableActionButtonComponent, TableActionComponent],
+  imports: [NgIf, NgClass, NgFor, NgxDatatableModule, TableButtonComponent],
   template: `
-    <ngx-datatable *ngIf="rows.length > 0 else noData" class="bootstrap"
+    <ngx-datatable *ngIf="rows.length > 0 else noData"
                    rowHeight="auto"
+                   [ngClass]="{
+                     'dark': theme === tableTheme.dark,
+                     'bootstrap': theme === tableTheme.light,
+                     'bg_white': theme === tableTheme.light,
+                   }"
                    [rows]="rows"
                    [columnMode]="columnMode"
                    [headerHeight]="30"
-                   [footerHeight]="30"
+                   [footerHeight]="28"
                    [scrollbarV]="false"
                    [sortType]="sortType"
                    [limit]="limit"
@@ -42,9 +51,10 @@ import {TableActionComponent} from '../table-action/table-action.component';
           <span> Acciones</span>
         </ng-template>
         <ng-template let-dataItem="row" ngx-datatable-cell-template>
-          <ng-container *ngFor="let action of actionConfig">
-            <ngx-table-action [data]="action" [type]="actionType.icon"/>
-          </ng-container>
+                    <span class="table__actions_content">
+            <ngx-table-button *ngFor="let action of actionConfig" [type]="action.type"
+                              (clickButton)="clickRow.emit($event)"/>
+          </span>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>
@@ -66,6 +76,9 @@ export class TableBasicComponent<T> {
   limit = 3;
 
   @Input()
+  theme: TableNestedThemeEnum = TableNestedThemeEnum.light;
+
+  @Input()
   actionConfig: ActionConfigInterface[] = [];
 
   @Input()
@@ -74,5 +87,8 @@ export class TableBasicComponent<T> {
   @Input()
   columnMode: ColumnMode = ColumnMode.force;
 
-  protected readonly actionType = ActionTypeEnum;
+  @Output()
+  clickRow: EventEmitter<number> = new EventEmitter();
+
+  tableTheme = TableNestedThemeEnum;
 }

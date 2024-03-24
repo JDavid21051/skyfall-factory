@@ -1,7 +1,9 @@
+import {ButtonTypeEnum} from '../components';
+
 export enum ActionTypeEnum {
   'icon' = 'icon',
-  'button' = 'button',
-  'span' = 'span'
+  'tag' = 'tag',
+  'text' = 'text'
 }
 
 export enum TableNestedThemeEnum {
@@ -12,7 +14,8 @@ export enum TableNestedThemeEnum {
 export interface TreeNestedColumnInterface {
   keyValue: string,
   name: string,
-  sort?: boolean
+  sort?: boolean,
+  type: ActionTypeEnum,
 }
 
 export interface ActionConfigInterface {
@@ -21,7 +24,7 @@ export interface ActionConfigInterface {
     icon: string,
     pack: string
   },
-  class: string,
+  type: ButtonTypeEnum,
   tooltip: string,
   click: Function
 }

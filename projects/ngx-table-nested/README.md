@@ -18,7 +18,7 @@
 ## 📋 Description
 The ngx-table-nested library provides a powerful nested table built on top of @swimlane/ngx-datatable with the ability to collapse
 rows to display a second table with a different column configuration than the parent.
-It allows you to create flexible and organised user interfaces to display hierarchical and structured data.
+It allows you to create flexible and organised user interfaces to display hierarchical and structured data. from projects
 
 ## 📋 Usage
 Once you have installed ngx-table-nested, you can import it in your AppModule:

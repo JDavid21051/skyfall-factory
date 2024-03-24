@@ -8,6 +8,10 @@
  */
 
 export * from './table-basic/table-basic.component';
+export * from './atoms/table-style/table-style.component';
+export * from './atoms/table-button/table-button.component';
+export * from './atoms/table-icon-pen/table-button-pen.component';
+export * from './atoms/table-icon-trash/table-button-trash.component';
+export * from './atoms/table-tag/table-tag.component';
+export * from './atoms/table-style/table-style.component';
 export * from './table-nested/table-nested.component';
-export * from './atoms/table-action-button/table-action-button.component';
-export * from './atoms/table-action-button-icon/table-action-button-icon.component';
