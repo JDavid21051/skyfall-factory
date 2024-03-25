@@ -8,12 +8,13 @@ import {NgClass} from '@angular/common';
     NgClass
   ],
   template: `
-    <span class="tag" [ngClass]="{'active': active, 'inactive': !active }">
-      {{ active ? 'activo' : 'inactive' }}
+    <span class="table__tag" [ngClass]="class">
+      {{ content }}
     </span>
   `,
   styleUrl: './table-tag.component.scss'
 })
 export class TableTagComponent {
-  @Input() active = false;
+  @Input() class = '';
+  @Input() content = '';
 }

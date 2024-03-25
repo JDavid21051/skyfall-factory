@@ -4,10 +4,10 @@ import {Observable} from 'rxjs';
 import {NgIf} from '@angular/common';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 
-import {TableNestedComponent, TableNestedThemeEnum, ActionConfigInterface, ButtonTypeEnum} from 'ngx-table-nested';
+import {TableNestedComponent, TableThemeEnum, TableActionColumnModel, ActionTypeEnum, ContentTypeColumnEnum} from 'ngx-table-nested';
 import {TableButtonComponent} from '../../atom/table-button/table-button.component';
 import {TableTagComponent} from '../../atom/table-tag/table-tag.component';
-import {ActionTypeEnum} from '../../../ngx-table-nested/src/lib/interfaces/tree-nested.models';
+import {angularLogo, dosLogo} from './one';
 
 export interface mockSpellsTreeTableData {
   id: string,
@@ -15,23 +15,7 @@ export interface mockSpellsTreeTableData {
   effect: string,
   sideEffects: boolean,
   characteristics: string | null,
-  time: null,
-  difficulty: string,
-  ingredients: {
-    id: string,
-    name: string
-  }[],
-  inventors: any[],
-  manufacturer: null | string
-}
-
-export interface mockSpellsTreeTableData {
-  id: string,
-  name: string,
-  effect: string,
-  sideEffects: boolean,
-  characteristics: string | null,
-  time: null,
+  time: string | null,
   difficulty: string,
   ingredients: {
     id: string,
@@ -70,19 +54,18 @@ export class AppComponent {
   spellMockData?: mockSpellsTreeTableData[];
   bookListData$$: Observable<mockBookTreeTableData[]> = this.http.get<mockBookTreeTableData[]>('../../../assets/mock/books.json');
   bookListData?: mockBookTreeTableData[];
-  buttonTypeEnum = ButtonTypeEnum;
-  typeCell = ActionTypeEnum;
   parentColumns = [
-    {name: 'Nombre', keyValue: 'name', sort: true, type: this.typeCell.text},
-    {name: 'Efecto', keyValue: 'effect', sort: true, type: this.typeCell.text},
-    {name: 'Desc Efecto', keyValue: 'sideEffects', type: this.typeCell.tag},
-    {name: 'Características', keyValue: 'characteristics', type: this.typeCell.text},
-    {name: 'Dificultad', keyValue: 'difficulty', type: this.typeCell.text}
+    {header: 'Nombre', field: 'name', sort: true, type: ContentTypeColumnEnum.text},
+    {header: 'Efecto', field: 'effect', sort: true, type: ContentTypeColumnEnum.text},
+    {header: 'Desc Efecto', field: 'sideEffects', type: ContentTypeColumnEnum.tag},
+    {header: 'imagen', field: 'time', type: ContentTypeColumnEnum.image},
+    {header: 'Características', field: 'characteristics', type: ContentTypeColumnEnum.text},
+    {header: 'Dificultad', field: 'difficulty', type: ContentTypeColumnEnum.text}
   ];
 
   childrenColumns = [
-    {name: 'Nombre', keyValue: 'name', type: this.typeCell.text},
-    {name: 'Id', keyValue: 'id', type: this.typeCell.text}
+    {header: 'Nombre', field: 'name', type: ContentTypeColumnEnum.text},
+    {header: 'Id', field: 'id', type: ContentTypeColumnEnum.text}
   ];
 
   config = [
@@ -90,58 +73,61 @@ export class AppComponent {
       label: 'Editar',
       icon: {
         icon: 'edit',
-        pack: 'far'
+        class: 'far'
       },
       tooltip: 'Editar',
-      type: this.buttonTypeEnum.update,
+      type: ActionTypeEnum.update,
       click: this.clickEdit
     },
     {
       label: 'Crear',
       icon: {
         icon: 'add',
-        pack: 'far'
+        class: 'far'
       },
-      type: this.buttonTypeEnum.delete,
+      type: ActionTypeEnum.delete,
       tooltip: 'Crear',
       click: this.clickCreate
     }
   ];
 
 
-  childrenConfig: ActionConfigInterface[] = [
+  childrenConfig: TableActionColumnModel[] = [
     {
       label: 'Crear',
       icon: {
         icon: 'add',
-        pack: 'far'
+        class: 'far'
       },
       tooltip: 'Crear',
-      type: this.buttonTypeEnum.delete,
+      type: ActionTypeEnum.delete,
       click: this.clickCreate
     },
     {
       label: 'Eliminar',
       icon: {
         icon: 'delete',
-        pack: 'far'
+        class: 'far'
       },
       tooltip: 'Eliminar',
-      type: this.buttonTypeEnum.update,
+      type: ActionTypeEnum.update,
       click: this.clickCreate
     }
   ];
 
-  currentTheme: TableNestedThemeEnum = TableNestedThemeEnum.dark;
-  treeThemeEnum = TableNestedThemeEnum;
+  currentTheme: TableThemeEnum = TableThemeEnum.dark;
+  treeThemeEnum = TableThemeEnum;
 
   constructor() {
     this.spellMockData$$.subscribe({
       next: (response) => {
-        console.log(response);
         this.spellMockData = [];
-        response.forEach((items) => {
-          console.log(items);
+        response.forEach((items, index:number) => {
+          if (index === 1) {
+            items['time'] = angularLogo;
+          } else if (index === 2) {
+            items['time'] = dosLogo;
+          }
           items['sideEffects'] = (items.ingredients.length > 0);
           this.spellMockData?.push(items);
         })
@@ -163,9 +149,8 @@ export class AppComponent {
     console.log(res, 'quiero edit');
   }
 
-  setCurrentTheme(param: TableNestedThemeEnum) {
+  setCurrentTheme(param: TableThemeEnum) {
     this.currentTheme = param;
   }
 
-  protected readonly ButtonTypeEnum = ButtonTypeEnum;
 }

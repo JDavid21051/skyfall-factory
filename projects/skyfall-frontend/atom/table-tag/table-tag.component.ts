@@ -8,7 +8,7 @@ import {NgClass} from '@angular/common';
     NgClass
   ],
   template: `
-    <span class="tag" [ngClass]="{'active': active, 'inactive': !active }">
+    <span class="table__tag" [ngClass]="{'active': active, 'inactive': !active }">
       {{ active ? 'activo' : 'inactive' }}
     </span>
   `,

@@ -1,22 +1,2 @@
 $mkad_active: #1ea758;
 $mkad_inactive: #808583;
-
-.tag {
-  padding: 2px 16px !important;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 24px;
-  font-weight: bold;
-
-  &.active {
-    background: rgba(0, 214, 143, .08);
-    border-color: $mkad_active;
-    color: $mkad_active;
-  }
-
-  &.inactive {
-    background: rgba(166, 182, 176, 0.08);
-    border-color: $mkad_inactive;
-    color: $mkad_inactive;
-  }
-}

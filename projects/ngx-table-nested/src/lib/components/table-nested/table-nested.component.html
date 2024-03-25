@@ -1,4 +1,4 @@
-<ngx-table-style />
+<ngx-table-style/>
 <ng-container *ngIf="dataTable.length > 0">
   <ngx-datatable #treeTable
                  [ngClass]="{
@@ -7,16 +7,18 @@
                }"
                  [rows]="dataTable"
                  [columnMode]="columnMode.flex"
-                 [headerHeight]="tableRowHeight"
-                 [footerHeight]="tableFooterHeight"
-                 [rowHeight]="tableRowHeight"
+                 [headerHeight]="rowHeight"
+                 [footerHeight]="footerHeight"
+                 [rowHeight]="rowHeight"
                  [scrollbarV]="false"
                  [sortType]="sortType.single"
                  [limit]="limit"
   >
     <ngx-datatable-row-detail [rowHeight]="getDetailHeight()" class="p-3">
       <ng-template let-row="row" ngx-datatable-row-detail-template>
-        <ngx-table-basic [rows]="row[childrenKey]" [theme]="theme" [columns]="childrenColumns" [limit]="childrenLimit" [actionConfig]="childrenActionConfig"/>
+        <ngx-table-basic class="m-auto" [rows]="row[childrenKey] ?? row['children']" [theme]="theme" [columns]="childrenColumns"
+                         [limit]="childrenLimit" [actionConfig]="childrenActionConfig"
+                         (clickRow)="clickRowChild.emit($event)"/>
       </ng-template>
     </ngx-datatable-row-detail>
     <ngx-datatable-column
@@ -28,33 +30,41 @@
       [cellTemplate]="iconCollapse"
     />
     <ng-container>
-      <ngx-datatable-column *ngFor="let item of columns" [name]="item.name" [prop]="item.keyValue" [resizeable]="false"
-                            [flexGrow]="1"
-                            [sortable]="!!item.sort">
+      <ngx-datatable-column *ngFor="let item of columns" [name]="item.header" [prop]="item.field"
+                            [resizeable]="item.resize ?? false"
+                            [flexGrow]="item.grow ?? 1" [sortable]="item.sort ?? false">
         <ng-template let-column="column" ngx-datatable-header-template>
           <strong>{{ column.name }}</strong>
         </ng-template>
         <ng-template let-dataItem="row" ngx-datatable-cell-template>
           <ng-container *ngIf="item.type === actionType.text">
-            <span> {{ dataItem[item.keyValue] }}</span>
+            <span> {{ dataItem[item.field] }}</span>
           </ng-container>
           <ng-container *ngIf="item.type === actionType.tag">
-            <ngx-table-tag [active]="dataItem[item.keyValue]" />
+            <ngx-table-tag [class]="dataItem[item.field] ? 'active': 'inactive'"
+                           [content]="dataItem[item.field] ? 'Activo': 'Inactivo'"/>
+          </ng-container>
+          <ng-container *ngIf="item.type === actionType.image">
+            <img *ngIf="dataItem[item.field] else imgAlternative" [src]="dataItem[item.field]" width="auto" height="32"
+                 alt="alternative text"
+                 class="table_img">
+            <ng-template #imgAlternative>
+              <span> n/a </span>
+            </ng-template>
           </ng-container>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column *ngIf="actionConfig.length > 0" name="'action'" prop="action"
-                            [resizeable]="false" [flexGrow]="1"
-                            [sortable]="false"
-                            headerClass="py-2"
-                            cellClass="no-p button-content">
+                            [resizeable]="false" [flexGrow]="1" headerClass="text_center"
+                            [sortable]="false">
         <ng-template ngx-datatable-header-template>
           <span></span>
         </ng-template>
         <ng-template let-dataItem="row" ngx-datatable-cell-template class="agregada_en_template">
           <!--        <ng-template [ngTemplateOutlet]="actionTemplate"></ng-template>-->
           <span class="table__actions_content">
-            <ngx-table-button *ngFor="let action of actionConfig" [type]="action.type" (clickButton)="onClickRow($event)" />
+            <ngx-table-button *ngFor="let action of actionConfig" [type]="action.type"
+                              (click)="onClickRow(action.type, dataItem.id)"/>
           </span>
         </ng-template>
       </ngx-datatable-column>

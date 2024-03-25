@@ -1,22 +1,31 @@
-$mkad_active: #1ea758;
+$mkad_active: #189e4b;
 $mkad_inactive: #808583;
 
-.tag {
+/* mixin for tag variants */
+@mixin TagVariantSchema($bg, $color) {
+  background: $bg;
+  border-color: $color;
+  color: $color;
+}
+
+/* Mixin for tag element */
+@mixin TagSchema {
   padding: 2px 16px !important;
   border-style: solid;
   border-width: 1px;
   border-radius: 24px;
   font-weight: bold;
+  font-size: 14px;
 
   &.active {
-    background: rgba(0, 214, 143, .08);
-    border-color: $mkad_active;
-    color: $mkad_active;
+    @include TagVariantSchema(rgba(0, 214, 143, .08), $mkad_active);
   }
 
   &.inactive {
-    background: rgba(166, 182, 176, 0.08);
-    border-color: $mkad_inactive;
-    color: $mkad_inactive;
+    @include TagVariantSchema(rgba(166, 182, 176, 0.08), $mkad_inactive);
   }
+}
+
+.table__tag {
+  @include TagSchema();
 }

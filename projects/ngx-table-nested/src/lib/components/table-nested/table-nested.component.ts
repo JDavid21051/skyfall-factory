@@ -10,32 +10,14 @@ import {
   TABLE_CHILDREN_ROW_OFFSET, TABLE_FOOTER_HEIGHT
 } from '../../constants/default-config-table.const';
 import {
-  ActionConfigInterface, ActionTypeEnum,
-  TableNestedThemeEnum,
-  TreeNestedColumnInterface
-} from '../../interfaces/tree-nested.models';
+  TableActionColumnModel, ContentTypeColumnEnum,
+  TableThemeEnum,
+  TableColumnModel,
+  ActionTypeEnum
+} from '../../models/nested.models';
 import {TableBasicComponent} from '../table-basic/table-basic.component';
-import {TableStyleComponent} from '../atoms/table-style/table-style.component';
-import {TableButtonComponent, ButtonTypeEnum} from '../atoms/table-button/table-button.component';
-import {TableTagComponent} from '../atoms/table-tag/table-tag.component';
-
-export enum TableCellTypeEnum {
-  'text' = 'text',
-  'tag' = 'tag',
-  'image' = 'image',
-  'icon' = 'icon',
-}
-
-export interface DataTableNested<T> {
-  data: T,
-  column: {
-    keyValue: string,
-    name: string,
-    sort?: boolean,
-    type: TableCellTypeEnum,
-    header: string,
-  }
-}
+import {TableStyleComponent} from '../table-style/table-style.component';
+import {TableButtonComponent, TableTagComponent} from '../atoms';
 
 @Component({
   selector: 'ngx-table-nested',
@@ -49,13 +31,12 @@ export class TableNestedComponent<T> {
 
   @Input()
   dataTable: T[] = [];
-  // dataTable?: DataTableNested<T>;
 
   @Input()
-  columns: TreeNestedColumnInterface[] = [];
+  columns: TableColumnModel[] = [];
 
   @Input()
-  childrenColumns: TreeNestedColumnInterface[] = [];
+  childrenColumns: TableColumnModel[] = [];
 
   @Input()
   childrenKey = '';
@@ -67,38 +48,39 @@ export class TableNestedComponent<T> {
   limit = TABLE_LIMIT;
 
   @Input()
-  theme: TableNestedThemeEnum = TableNestedThemeEnum.light;
+  theme: TableThemeEnum = TableThemeEnum.light;
 
   @Input()
-  actionConfig: ActionConfigInterface[] = [];
+  actionConfig: TableActionColumnModel[] = [];
 
   @Input()
-  childrenActionConfig: ActionConfigInterface[] = [];
+  childrenActionConfig: TableActionColumnModel[] = [];
 
   @Output()
-  clickRow: EventEmitter<number> = new EventEmitter();
+  clickRow: EventEmitter<any> = new EventEmitter();
+
+  @Output()
+  clickRowChild: EventEmitter<any> = new EventEmitter();
 
   columnMode = ColumnMode;
   sortType = SortType;
-  tableTheme = TableNestedThemeEnum;
-  actionType = ActionTypeEnum;
+  tableTheme = TableThemeEnum;
+  actionType = ContentTypeColumnEnum;
 
   tableRowsCount = TABLE_CHILDREN_LIMIT;
   tableRowExpanded: any;
 
   iconColumnWidth = TABLE_COLUMN_ICON_WIDTH;
-  tableRowHeight = TABLE_ROW_HEIGHT;
-  tableFooterHeight = TABLE_FOOTER_HEIGHT;
+  rowHeight = TABLE_ROW_HEIGHT;
+  footerHeight = TABLE_FOOTER_HEIGHT;
+
   childrenRowHeight = TABLE_CHILDREN_ROW_HEIGHT;
   childrenRowOff = TABLE_CHILDREN_ROW_OFFSET;
-  CERO = 0;
-  readonly buttonTypeEnum = ButtonTypeEnum;
 
   toggleExpandRow(row: any) {
     if (this.tableRowExpanded) {
       this.table.rowDetail.toggleExpandRow(this.tableRowExpanded);
     }
-
     if (this.tableRowExpanded !== row) {
       this.table.rowDetail.toggleExpandRow(row);
       this.tableRowExpanded = row;
@@ -110,17 +92,19 @@ export class TableNestedComponent<T> {
   }
 
   getDetailHeight() {
-    return this.childrenRowOff + (this.tableRowsCount === this.CERO ? this.CERO : (this.childrenRowHeight * this.calcRowCount()));
+    const zero = 0;
+    return this.childrenRowOff + (this.tableRowsCount === zero ? zero : (this.childrenRowHeight * this.calcRowCount()));
   }
 
   calcRowCount() {
-    if (this.tableRowsCount === this.CERO) return this.tableRowsCount;
+    const zero = 0;
+    if (this.tableRowsCount === zero) return this.tableRowsCount;
     if (this.tableRowsCount <= TABLE_CHILDREN_LIMIT) return this.tableRowsCount;
     return TABLE_CHILDREN_LIMIT;
   }
 
-  onClickRow(event: number) {
-    console.log(event);
+  onClickRow(event: ActionTypeEnum, event2: number) {
+    console.log(event, event2);
   }
 
 }

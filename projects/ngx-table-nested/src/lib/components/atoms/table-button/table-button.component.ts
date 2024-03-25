@@ -1,12 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NgClass, NgIf} from '@angular/common';
 import {TableButtonTrashComponent} from '../table-icon-trash/table-button-trash.component';
 import {TableButtonPenComponent} from '../table-icon-pen/table-button-pen.component';
-
-export enum ButtonTypeEnum {
-  'update' = 'update',
-  'delete' = 'delete',
-}
+import {ActionTypeEnum} from '../../../models/nested.models';
 
 @Component({
   selector: 'ngx-table-button',
@@ -14,24 +10,23 @@ export enum ButtonTypeEnum {
   imports: [NgClass, NgIf, TableButtonTrashComponent, TableButtonPenComponent],
   template: `
     <button class="table__btn"
-            [ngClass]="{ 'update': isUpdated(), 'delete': isDeleted() }">
-      <ngx-icon-pen class="icon" *ngIf="isUpdated()" (click)="clickButton.emit(0)"/>
-      <ngx-icon-trash class="icon" *ngIf="isDeleted()" (click)="clickButton.emit(1)"/>
+            [ngClass]="{ 'update': isUpdated, 'delete': isDeleted }">
+      <ngx-icon-pen class="icon" *ngIf="isUpdated"/>
+      <ngx-icon-trash class="icon" *ngIf="isDeleted"/>
     </button>
   `,
   styleUrl: './table-button.component.scss'
 })
 export class TableButtonComponent {
-  @Input() type: ButtonTypeEnum = ButtonTypeEnum.update;
-  @Output() clickButton: EventEmitter<number> = new EventEmitter();
-  buttonTypeEnum = ButtonTypeEnum;
+  @Input() type: ActionTypeEnum = ActionTypeEnum.update;
+  actionType = ActionTypeEnum;
 
-  isUpdated() {
-    return this.type === this.buttonTypeEnum.update;
+  get isUpdated(): boolean {
+    return this.type === this.actionType.update;
   }
 
-  isDeleted() {
-    return this.type === this.buttonTypeEnum.delete;
+  get isDeleted(): boolean {
+    return this.type === this.actionType.delete;
   }
 
 }

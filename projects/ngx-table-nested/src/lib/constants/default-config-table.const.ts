@@ -5,4 +5,4 @@ export const TABLE_FOOTER_HEIGHT = 28;
 
 export const TABLE_CHILDREN_ROW_OFFSET = 110;
 export const TABLE_CHILDREN_ROW_HEIGHT = 40;
-export const TABLE_CHILDREN_LIMIT = 3;
+export const TABLE_CHILDREN_LIMIT = 5;

@@ -1,13 +1,12 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {
-  ActionConfigInterface,
-  ActionTypeEnum,
-  TableNestedThemeEnum,
-  TreeNestedColumnInterface
-} from '../../interfaces/tree-nested.models';
+  TableActionColumnModel,
+  TableThemeEnum,
+  TableColumnModel, ActionTypeEnum
+} from '../../models/nested.models';
 import {ColumnMode, NgxDatatableModule, SortType} from '@swimlane/ngx-datatable';
 import {NgFor, NgIf, NgClass} from '@angular/common';
-import {TableButtonComponent} from '../atoms/table-button/table-button.component';
+import {TableButtonComponent} from '../atoms';
 
 @Component({
   selector: 'ngx-table-basic',
@@ -29,16 +28,16 @@ import {TableButtonComponent} from '../atoms/table-button/table-button.component
                    [sortType]="sortType"
                    [limit]="limit"
     >
-      <ng-container *ngFor="let item  of columns">
-        <ngx-datatable-column [name]="item.name" [prop]="item.keyValue" [resizeable]="false" [flexGrow]="1"
+      <ng-container *ngFor="let item of columns">
+        <ngx-datatable-column [name]="item.header" [prop]="item.field" [resizeable]="false" [flexGrow]="1"
                               [sortable]="!!item.sort"
-                              headerClass="py-2 children_header"
-                              cellClass="py-2 children_row">
+                              headerClass="py-2"
+                              cellClass="py-2">
           <ng-template let-column="column" ngx-datatable-header-template>
             <strong>{{ column.name }}</strong>
           </ng-template>
           <ng-template let-dataItem="row" ngx-datatable-cell-template>
-            <span> {{ dataItem[item.keyValue] }}</span>
+            <span> {{ dataItem[item.field] }}</span>
           </ng-template>
         </ngx-datatable-column>
       </ng-container>
@@ -53,7 +52,7 @@ import {TableButtonComponent} from '../atoms/table-button/table-button.component
         <ng-template let-dataItem="row" ngx-datatable-cell-template>
                     <span class="table__actions_content">
             <ngx-table-button *ngFor="let action of actionConfig" [type]="action.type"
-                              (clickButton)="clickRow.emit($event)"/>
+                              (click)="clickRow.emit({type: action.type, id: dataItem.id})"/>
           </span>
         </ng-template>
       </ngx-datatable-column>
@@ -70,16 +69,16 @@ export class TableBasicComponent<T> {
   rows: T[] = [];
 
   @Input()
-  columns: TreeNestedColumnInterface[] = [];
+  columns: TableColumnModel[] = [];
 
   @Input()
   limit = 3;
 
   @Input()
-  theme: TableNestedThemeEnum = TableNestedThemeEnum.light;
+  theme: TableThemeEnum = TableThemeEnum.light;
 
   @Input()
-  actionConfig: ActionConfigInterface[] = [];
+  actionConfig: TableActionColumnModel[] = [];
 
   @Input()
   sortType: SortType = SortType.single;
@@ -88,7 +87,7 @@ export class TableBasicComponent<T> {
   columnMode: ColumnMode = ColumnMode.force;
 
   @Output()
-  clickRow: EventEmitter<number> = new EventEmitter();
+  clickRow: EventEmitter<{ type: ActionTypeEnum, id: number }> = new EventEmitter();
 
-  tableTheme = TableNestedThemeEnum;
+  tableTheme = TableThemeEnum;
 }
