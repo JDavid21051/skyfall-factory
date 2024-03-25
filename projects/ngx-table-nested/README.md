@@ -1,13 +1,14 @@
+<header style="display: flex; align-items: center; justify-content:center; gap: 16px; width: 100%; max-height: 100px;">
 <h1 style="display: flex; align-items: center; justify-content:center; gap: 16px">
-  <a href="https://github.com/JDavid21051/skyfall-factory">
+    <a href="https://github.com/JDavid21051/skyfall-factory">
 
 [![My Skills](https://skillicons.dev/icons?i=angular&theme=light)](https://angular.io)
-
-
+  
 <span style="display: inline-flex"> Ngx Table Nested  </span>
 
-  </a>
+</a>
 </h1>
+</header>
 
 ## Content
 

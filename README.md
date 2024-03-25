@@ -1,20 +1,14 @@
-<header style="display: flex; justify-content:center; gap: 16px; width: 100%; max-height: 400px;">
-  <a href="https://github.com/JDavid21051/skyfall-factory" style="display: flex; align-items: center;">
-    <?xml version="1.0" encoding="UTF-8"?>
-    <svg style="height: 250px; width: 250px"  enable-background="new 0 0 250 250" version="1.1" viewBox="0 0 250 250" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
-      <style type="text/css">
-        .st0{fill:#DD0031;}
-        .st1{fill:#C3002F;}
-        .st2{fill:#FFFFFF;}
-      </style>
-      <polygon class="st0" points="125 30 125 30 125 30 31.9 63.2 46.1 186.3 125 230 125 230 125 230 203.9 186.3 218.1 63.2"/>
-      <polygon class="st1" points="125 30 125 52.2 125 52.1 125 153.4 125 153.4 125 230 125 230 203.9 186.3 218.1 63.2"/>
-      <path class="st2" d="m125 52.1-58.2 130.5h21.7l11.7-29.2h49.4l11.7 29.2h21.7l-58-130.5zm17 83.3h-34l17-40.9 17 40.9z"/>
-    </svg>
-    <h1 style="display: inline-flex"> Ngx Table Nested  </h1>
-  </a>
-</header>
+<header style="display: flex; align-items: center; justify-content:center; gap: 16px; width: 100%; max-height: 100px;">
+<h1 style="display: flex; align-items: center; justify-content:center; gap: 16px">
+    <a href="https://github.com/JDavid21051/skyfall-factory">
 
+[![My Skills](https://skillicons.dev/icons?i=angular&theme=light)](https://angular.io)
+
+<span style="display: inline-flex"> Ngx Table Nested  </span>
+
+</a>
+</h1>
+</header>
 
 ## Content
 
