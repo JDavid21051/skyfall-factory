@@ -1,81 +1,80 @@
 import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
-import {ColumnMode, DatatableComponent, NgxDatatableModule, SortType} from '@swimlane/ngx-datatable';
+import {DatatableComponent, NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {
-  TABLE_CHILDREN_LIMIT,
   TABLE_LIMIT,
   TABLE_COLUMN_ICON_WIDTH,
-  TABLE_ROW_HEIGHT,
   TABLE_CHILDREN_ROW_HEIGHT,
-  TABLE_CHILDREN_ROW_OFFSET, TABLE_FOOTER_HEIGHT
-} from '../../constants/default-config-table.const';
+  TABLE_CHILDREN_ROW_OFFSET,
+  DEFAULT_BASIC_CONFIG,
+  TABLE_CHILDREN_KEY
+} from '../../constants';
 import {
-  TableActionColumnModel, ContentTypeColumnEnum,
   TableThemeEnum,
-  TableColumnModel,
-  ActionTypeEnum
-} from '../../models/nested.models';
+  TableEventRowClick,
+  TableConfigModel,
+  TableExtraConfigModel
+} from '../../models';
+import {TableButtonComponent, TableTagComponent} from '../atoms';
+
 import {TableBasicComponent} from '../table-basic/table-basic.component';
 import {TableStyleComponent} from '../table-style/table-style.component';
-import {TableButtonComponent, TableTagComponent} from '../atoms';
+import {TableColumnViewComponent} from '../atoms/table-column-view/table-column-view.component';
 
 @Component({
   selector: 'ngx-table-nested',
   standalone: true,
-  imports: [NgForOf, NgIf, NgClass, NgxDatatableModule, TableBasicComponent, TableStyleComponent, TableButtonComponent, TableTagComponent],
+  imports: [NgForOf, NgIf, NgClass, NgxDatatableModule, TableBasicComponent, TableStyleComponent, TableButtonComponent, TableTagComponent, TableColumnViewComponent],
   templateUrl: './table-nested.component.html',
   styleUrls: ['./table-nested.component.scss']
 })
-export class TableNestedComponent<T> {
-  @ViewChild('treeTable') table!: DatatableComponent;
+export class TableNestedComponent {
+  @ViewChild('tableNested') table!: DatatableComponent;
+  readonly defaultConfig = DEFAULT_BASIC_CONFIG;
 
-  @Input()
-  dataTable: T[] = [];
+  @Input({required: true}) dataTable?: TableConfigModel;
 
-  @Input()
-  columns: TableColumnModel[] = [];
+  @Input({required: false}) limit = this.defaultConfig.limit;
 
-  @Input()
-  childrenColumns: TableColumnModel[] = [];
+  @Input({required: false}) theme: TableThemeEnum = TableThemeEnum.light;
 
-  @Input()
-  childrenKey = '';
+  @Output() onRowClick: EventEmitter<TableEventRowClick> = new EventEmitter();
 
-  @Input()
-  childrenLimit = TABLE_CHILDREN_LIMIT;
+  @Output() onRowClickChildren: EventEmitter<TableEventRowClick> = new EventEmitter();
 
-  @Input()
-  limit = TABLE_LIMIT;
-
-  @Input()
-  theme: TableThemeEnum = TableThemeEnum.light;
-
-  @Input()
-  actionConfig: TableActionColumnModel[] = [];
-
-  @Input()
-  childrenActionConfig: TableActionColumnModel[] = [];
-
-  @Output()
-  clickRow: EventEmitter<any> = new EventEmitter();
-
-  @Output()
-  clickRowChild: EventEmitter<any> = new EventEmitter();
-
-  columnMode = ColumnMode;
-  sortType = SortType;
-  tableTheme = TableThemeEnum;
-  actionType = ContentTypeColumnEnum;
-
-  tableRowsCount = TABLE_CHILDREN_LIMIT;
+  tableRowsCount = this.defaultConfig.limit;
   tableRowExpanded: any;
-
   iconColumnWidth = TABLE_COLUMN_ICON_WIDTH;
-  rowHeight = TABLE_ROW_HEIGHT;
-  footerHeight = TABLE_FOOTER_HEIGHT;
-
   childrenRowHeight = TABLE_CHILDREN_ROW_HEIGHT;
   childrenRowOff = TABLE_CHILDREN_ROW_OFFSET;
+
+  getChildrenKey() {
+    const data = this.dataTable;
+    if (data && data.children && data.children && data.children.field) return data.children.field;
+    return TABLE_CHILDREN_KEY;
+  }
+
+  getTableTheme() {
+    return {
+      'dark': this.theme === TableThemeEnum.dark,
+      'bootstrap': this.theme === TableThemeEnum.light
+    };
+  }
+
+  getChildrenExtraConfig() {
+    if (this.dataTable && this.dataTable.children && this.dataTable.children.extra) return this.dataTable.children.extra;
+    return <TableExtraConfigModel>{
+      actions: {
+        data: [],
+        header: ''
+      }
+    };
+  }
+
+  getDetailHeight() {
+    const zero = 0;
+    return this.childrenRowOff + (this.tableRowsCount === zero ? zero : (this.childrenRowHeight * this.calcRowCount()));
+  }
 
   toggleExpandRow(row: any) {
     if (this.tableRowExpanded) {
@@ -88,23 +87,13 @@ export class TableNestedComponent<T> {
       this.tableRowExpanded = undefined;
     }
 
-    this.tableRowsCount = row[this.childrenKey].length;
-  }
-
-  getDetailHeight() {
-    const zero = 0;
-    return this.childrenRowOff + (this.tableRowsCount === zero ? zero : (this.childrenRowHeight * this.calcRowCount()));
+    this.tableRowsCount = row[this.getChildrenKey()].length;
   }
 
   calcRowCount() {
     const zero = 0;
     if (this.tableRowsCount === zero) return this.tableRowsCount;
-    if (this.tableRowsCount <= TABLE_CHILDREN_LIMIT) return this.tableRowsCount;
-    return TABLE_CHILDREN_LIMIT;
+    if (this.tableRowsCount <= TABLE_LIMIT) return this.tableRowsCount;
+    return TABLE_LIMIT;
   }
-
-  onClickRow(event: ActionTypeEnum, event2: number) {
-    console.log(event, event2);
-  }
-
 }

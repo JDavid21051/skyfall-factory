@@ -1,13 +1,15 @@
+import {ColumnMode, SortType} from '@swimlane/ngx-datatable';
+
 export enum ContentTypeColumnEnum {
   'icon' = 'icon',
   'tag' = 'tag',
   'text' = 'text',
-  'image' = 'image',
+  'image' = 'image'
 }
 
 export enum ActionTypeEnum {
   'update' = 'update',
-  'delete' = 'delete',
+  'delete' = 'delete'
 }
 
 export enum TableThemeEnum {
@@ -15,51 +17,56 @@ export enum TableThemeEnum {
   'dark' = 'dark'
 }
 
+export interface TableEventRowClick<T =  any> {
+  type: ActionTypeEnum;
+  row: T;
+}
+
 export interface TableColumnModel {
-  field: string,
-  header: string,
-  sort?: boolean,
-  resize?: boolean,
-  grow?: number,
-  type: ContentTypeColumnEnum,
+  field: string;
+  header: string;
+  sort?: boolean;
+  resize?: boolean;
+  grow?: number;
+  type: ContentTypeColumnEnum;
 }
 
 export interface TableActionColumnModel {
-  label: string,
+  label: string;
   icon: {
-    icon: string,
+    icon: string;
     class: string
-  },
-  type: ActionTypeEnum,
-  tooltip: string,
-  click: Function
+  };
+  type: ActionTypeEnum;
+  tooltip: string;
+  click: Function;
+}
+export interface TableActioneConfigModel {
+  data: TableActionColumnModel[];
+  header: string;
 }
 
-
-
-// TODO: pending for test
-export interface TableChildrenSafeModel<T = any> {
-  children:  T
+export interface TableMessageConfigModel {
+  empty?: string;
+  error?: string;
 }
 
-export interface TbNestedConfigInterface {
-  column: TableColumnModel[],
-  limit: number,
+export interface TableExtraConfigModel {
+  actions: TableActioneConfigModel;
+  messages?: TableMessageConfigModel;
+  sortType?: SortType;
+  columnMode?: ColumnMode;
+}
+export interface TableChildrenConfigModel {
+  field?: string;
+  columns: TableColumnModel[];
+  extra?: TableExtraConfigModel;
+  limit?: number;
 }
 
-export interface TbNestedConfigChildrenCInterface extends TbNestedConfigInterface {
-  key: string;
-}
-
-export interface TableConfigModel<T extends TableChildrenSafeModel> {
-  data: T,
-  columns: TableColumnModel[],
-  childrenColumns: TableColumnModel[],
-  extra?: {
-    actions: {
-      data: TableActionColumnModel[],
-      header: string
-    },
-  },
-  theme?: TableThemeEnum
+export interface TableConfigModel<T = any[]> {
+  data: T;
+  columns: TableColumnModel[];
+  extra?: TableExtraConfigModel;
+  children?: TableChildrenConfigModel;
 }

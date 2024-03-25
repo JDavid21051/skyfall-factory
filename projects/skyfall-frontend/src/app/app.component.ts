@@ -2,11 +2,16 @@ import {Component, inject} from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {NgIf} from '@angular/common';
-import {NgxDatatableModule} from '@swimlane/ngx-datatable';
+import {NgxDatatableModule, ColumnMode, SortType} from '@swimlane/ngx-datatable';
 
-import {TableNestedComponent, TableThemeEnum, TableActionColumnModel, ActionTypeEnum, ContentTypeColumnEnum} from 'ngx-table-nested';
-import {TableButtonComponent} from '../../atom/table-button/table-button.component';
-import {TableTagComponent} from '../../atom/table-tag/table-tag.component';
+import {
+  TableNestedComponent,
+  TableThemeEnum,
+  TableActionColumnModel,
+  ActionTypeEnum,
+  ContentTypeColumnEnum,
+  TableBasicComponent
+} from 'ngx-table-nested';
 import {angularLogo, dosLogo} from './one';
 
 export interface mockSpellsTreeTableData {
@@ -45,7 +50,7 @@ export interface mockBookTreeTableData {
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [NgIf, HttpClientModule, NgxDatatableModule, TableNestedComponent, TableButtonComponent, TableTagComponent],
+  imports: [NgIf, HttpClientModule, NgxDatatableModule, TableNestedComponent, TableBasicComponent],
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
@@ -62,6 +67,7 @@ export class AppComponent {
     {header: 'Características', field: 'characteristics', type: ContentTypeColumnEnum.text},
     {header: 'Dificultad', field: 'difficulty', type: ContentTypeColumnEnum.text}
   ];
+  configTable = {mode: ColumnMode, sort: SortType};
 
   childrenColumns = [
     {header: 'Nombre', field: 'name', type: ContentTypeColumnEnum.text},
@@ -90,7 +96,6 @@ export class AppComponent {
       click: this.clickCreate
     }
   ];
-
 
   childrenConfig: TableActionColumnModel[] = [
     {
@@ -122,7 +127,7 @@ export class AppComponent {
     this.spellMockData$$.subscribe({
       next: (response) => {
         this.spellMockData = [];
-        response.forEach((items, index:number) => {
+        response.forEach((items, index: number) => {
           if (index === 1) {
             items['time'] = angularLogo;
           } else if (index === 2) {
@@ -130,7 +135,7 @@ export class AppComponent {
           }
           items['sideEffects'] = (items.ingredients.length > 0);
           this.spellMockData?.push(items);
-        })
+        });
       }
     });
 

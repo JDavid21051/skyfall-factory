@@ -6,3 +6,18 @@
  * File name:    atoms.models.ts
  * IDE:          WebStorm
  */
+
+export interface TableTagConfigProp {
+  text?: string;
+  class?: string;
+}
+
+export interface TableImageConfig {
+  alternativeText?: string;
+  noImageText?: string;
+}
+
+export interface TableTagConfigModel {
+  active?: TableTagConfigProp;
+  inactive?: TableTagConfigProp;
+}
