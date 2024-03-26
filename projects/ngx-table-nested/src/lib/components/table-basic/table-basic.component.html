@@ -1,0 +1,46 @@
+<ngx-datatable *ngIf="dataTable && dataTable.columns && dataTable.data && dataTable.data.length > 0  else noData"
+               [rowHeight]="defaultConfig.row"
+               [ngClass]="{
+                     'dark': isDark,
+                     'bootstrap': isLight,
+                     'bg_white': isLight,
+                   }"
+               [rows]="dataTable.data"
+               [columnMode]="dataTable.extra?.columnMode ?? columnMode"
+               [headerHeight]="defaultConfig.header"
+               [footerHeight]="defaultConfig.footer"
+               [scrollbarV]="false"
+               [sortType]="dataTable.extra?.sortType ?? sortType"
+               [limit]="limit ?? defaultConfig.limit"
+>
+  <ng-container *ngFor="let item of dataTable.columns">
+    <ngx-datatable-column [name]="item.header" [prop]="item.field" [resizeable]="item.resize ?? false"
+                          [flexGrow]="item.grow ?? 1" [sortable]="item.sort ?? false"
+                          headerClass="py-2" cellClass="py-2">
+      <ng-template let-column="column" ngx-datatable-header-template>
+        <strong>{{ column.name }}</strong>
+      </ng-template>
+      <ng-template let-dataItem="row" ngx-datatable-cell-template>
+        <ngx-table-column-view [type]="item.type" [value]="dataItem[item.field]"/>
+      </ng-template>
+    </ngx-datatable-column>
+  </ng-container>
+  <ngx-datatable-column *ngIf="dataTable.extra && dataTable.extra.actions" name="{{dataTable.extra.actions.header}}"
+                        prop="action"
+                        [resizeable]="false" [flexGrow]="1"
+                        [sortable]="false"
+                        headerClass="py-2 text_center" cellClass="py-2">
+    <ng-template ngx-datatable-header-template>
+      <span> {{ dataTable.extra.actions.header }}</span>
+    </ng-template>
+    <ng-template let-dataItem="row" ngx-datatable-cell-template>
+          <span class="table__actions_content">
+            <ngx-table-button *ngFor="let action of dataTable.extra.actions.data" [type]="action.type"
+                              (click)="onRowClick.emit({type: action.type, row: dataItem})" [title]="action.tooltip"/>
+          </span>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>
+<ng-template #noData>
+  <div class="table-alert-warning"> {{ dataTable?.extra?.messages?.empty ?? 'No hay información que mostrar...' }}</div>
+</ng-template>

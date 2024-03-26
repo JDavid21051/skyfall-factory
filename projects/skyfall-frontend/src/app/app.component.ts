@@ -2,33 +2,25 @@ import {Component, inject} from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {NgIf} from '@angular/common';
-import {NgxDatatableModule} from '@swimlane/ngx-datatable';
+import {NgxDatatableModule, ColumnMode, SortType} from '@swimlane/ngx-datatable';
 
-import {TableNestedComponent, TableNestedThemeEnum, ActionConfigInterface} from '@ngx-table/nested';
-
-export interface mockSpellsTreeTableData {
-  id: string,
-  name: string,
-  effect: string,
-  sideEffects: string,
-  characteristics: string | null,
-  time: null,
-  difficulty: string,
-  ingredients: {
-    id: string,
-    name: string
-  }[],
-  inventors: any[],
-  manufacturer: null | string
-}
+import {
+  TableNestedComponent,
+  TableThemeEnum,
+  TableActionColumnModel,
+  ActionTypeEnum,
+  ContentTypeColumnEnum,
+  TableBasicComponent
+} from 'ngx-table-nested';
+import {angularLogo, dosLogo} from './one';
 
 export interface mockSpellsTreeTableData {
   id: string,
   name: string,
   effect: string,
-  sideEffects: string,
+  sideEffects: boolean,
   characteristics: string | null,
-  time: null,
+  time: string | null,
   difficulty: string,
   ingredients: {
     id: string,
@@ -58,28 +50,28 @@ export interface mockBookTreeTableData {
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [NgIf, HttpClientModule, NgxDatatableModule, TableNestedComponent],
+  imports: [NgIf, HttpClientModule, NgxDatatableModule, TableNestedComponent, TableBasicComponent],
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   private readonly http = inject(HttpClient);
   spellMockData$$: Observable<mockSpellsTreeTableData[]> = this.http.get<mockSpellsTreeTableData[]>('../../../assets/mock/alternative.json');
   spellMockData?: mockSpellsTreeTableData[];
-
   bookListData$$: Observable<mockBookTreeTableData[]> = this.http.get<mockBookTreeTableData[]>('../../../assets/mock/books.json');
   bookListData?: mockBookTreeTableData[];
-
   parentColumns = [
-    {name: 'Nombre', keyValue: 'name', sort: true},
-    {name: 'Efecto', keyValue: 'effect', sort: true},
-    {name: 'Desc Efecto', keyValue: 'sideEffects'},
-    {name: 'Características', keyValue: 'characteristics'},
-    {name: 'Dificultad', keyValue: 'difficulty'}
+    {header: 'Nombre', field: 'name', sort: true, type: ContentTypeColumnEnum.text},
+    {header: 'Efecto', field: 'effect', sort: true, type: ContentTypeColumnEnum.text},
+    {header: 'Desc Efecto', field: 'sideEffects', type: ContentTypeColumnEnum.tag},
+    {header: 'imagen', field: 'time', type: ContentTypeColumnEnum.image},
+    {header: 'Características', field: 'characteristics', type: ContentTypeColumnEnum.text},
+    {header: 'Dificultad', field: 'difficulty', type: ContentTypeColumnEnum.text}
   ];
+  configTable = {mode: ColumnMode, sort: SortType};
 
   childrenColumns = [
-    {name: 'Nombre', keyValue: 'name'},
-    {name: 'Id', keyValue: 'id'}
+    {header: 'Nombre', field: 'name', type: ContentTypeColumnEnum.text},
+    {header: 'Id', field: 'id', type: ContentTypeColumnEnum.text}
   ];
 
   config = [
@@ -87,55 +79,63 @@ export class AppComponent {
       label: 'Editar',
       icon: {
         icon: 'edit',
-        pack: 'far'
+        class: 'far'
       },
       tooltip: 'Editar',
-      class: 'btn',
+      type: ActionTypeEnum.update,
       click: this.clickEdit
     },
     {
       label: 'Crear',
       icon: {
         icon: 'add',
-        pack: 'far'
+        class: 'far'
       },
-      class: 'btn',
+      type: ActionTypeEnum.delete,
       tooltip: 'Crear',
       click: this.clickCreate
     }
   ];
 
-
-  childrenConfig: ActionConfigInterface[] = [
+  childrenConfig: TableActionColumnModel[] = [
     {
       label: 'Crear',
       icon: {
         icon: 'add',
-        pack: 'far'
+        class: 'far'
       },
       tooltip: 'Crear',
-      class: 'btn-info',
+      type: ActionTypeEnum.delete,
       click: this.clickCreate
     },
     {
       label: 'Eliminar',
       icon: {
         icon: 'delete',
-        pack: 'far'
+        class: 'far'
       },
       tooltip: 'Eliminar',
-      class: 'btn-info',
+      type: ActionTypeEnum.update,
       click: this.clickCreate
     }
   ];
 
-  currentTheme: TableNestedThemeEnum = TableNestedThemeEnum.dark;
-  treeThemeEnum = TableNestedThemeEnum;
+  currentTheme: TableThemeEnum = TableThemeEnum.dark;
+  treeThemeEnum = TableThemeEnum;
 
   constructor() {
     this.spellMockData$$.subscribe({
       next: (response) => {
-        this.spellMockData = response;
+        this.spellMockData = [];
+        response.forEach((items, index: number) => {
+          if (index === 1) {
+            items['time'] = angularLogo;
+          } else if (index === 2) {
+            items['time'] = dosLogo;
+          }
+          items['sideEffects'] = (items.ingredients.length > 0);
+          this.spellMockData?.push(items);
+        });
       }
     });
 
@@ -154,7 +154,7 @@ export class AppComponent {
     console.log(res, 'quiero edit');
   }
 
-  setCurrentTheme(param: TableNestedThemeEnum) {
+  setCurrentTheme(param: TableThemeEnum) {
     this.currentTheme = param;
   }
 

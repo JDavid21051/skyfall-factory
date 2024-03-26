@@ -1,78 +1,35 @@
-import {Component, Input} from '@angular/core';
-import {ActionConfigInterface, ActionTypeEnum, TreeNestedColumnInterface} from '../../interfaces/tree-nested.models';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {TableThemeEnum, TableEventRowClick, TableConfigModel} from '../../models';
 import {ColumnMode, NgxDatatableModule, SortType} from '@swimlane/ngx-datatable';
-import {NgFor, NgIf} from '@angular/common';
-import {TableActionButtonComponent} from '../atoms/table-action-button/table-action-button.component';
-import {TableActionComponent} from '../table-action/table-action.component';
+import {NgFor, NgIf, NgClass} from '@angular/common';
+import {TableButtonComponent, TableTagComponent} from '../atoms';
+import {DEFAULT_BASIC_CONFIG} from '../../constants';
+import {TableColumnViewComponent} from '../atoms/table-column-view/table-column-view.component';
 
 @Component({
   selector: 'ngx-table-basic',
   standalone: true,
-  imports: [NgIf, NgFor, NgxDatatableModule, TableActionButtonComponent, TableActionComponent],
-  template: `
-    <ngx-datatable *ngIf="rows.length > 0 else noData" class="bootstrap"
-                   rowHeight="auto"
-                   [rows]="rows"
-                   [columnMode]="columnMode"
-                   [headerHeight]="30"
-                   [footerHeight]="30"
-                   [scrollbarV]="false"
-                   [sortType]="sortType"
-                   [limit]="limit"
-    >
-      <ng-container *ngFor="let item  of columns">
-        <ngx-datatable-column [name]="item.name" [prop]="item.keyValue" [resizeable]="false" [flexGrow]="1"
-                              [sortable]="!!item.sort"
-                              headerClass="py-2 children_header"
-                              cellClass="py-2 children_row">
-          <ng-template let-column="column" ngx-datatable-header-template>
-            <strong>{{ column.name }}</strong>
-          </ng-template>
-          <ng-template let-dataItem="row" ngx-datatable-cell-template>
-            <span> {{ dataItem[item.keyValue] }}</span>
-          </ng-template>
-        </ngx-datatable-column>
-      </ng-container>
-      <ngx-datatable-column *ngIf="actionConfig.length > 0" name="'Acciones'" prop="Acciones"
-                            [resizeable]="false" [flexGrow]="1"
-                            [sortable]="false"
-                            headerClass="py-2 children_header"
-                            cellClass="py-2 children_row">
-        <ng-template ngx-datatable-header-template>
-          <span> Acciones</span>
-        </ng-template>
-        <ng-template let-dataItem="row" ngx-datatable-cell-template>
-          <ng-container *ngFor="let action of actionConfig">
-            <ngx-table-action [data]="action" [type]="actionType.icon"/>
-          </ng-container>
-        </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
-    <ng-template #noData>
-      <div class="table-alert-warning">
-        No se encontraron datos para mostrar
-      </div>
-    </ng-template>
-  `
+  imports: [NgIf, NgClass, NgFor, NgxDatatableModule, TableButtonComponent, TableTagComponent, TableColumnViewComponent],
+  templateUrl: './table-basic.component.html'
 })
-export class TableBasicComponent<T> {
-  @Input()
-  rows: T[] = [];
+export class TableBasicComponent {
+  readonly sortType = SortType.single;
+  readonly columnMode = ColumnMode.flex;
+  readonly defaultConfig = DEFAULT_BASIC_CONFIG;
 
-  @Input()
-  columns: TreeNestedColumnInterface[] = [];
+  @Input() dataTable?: TableConfigModel;
 
-  @Input()
-  limit = 3;
+  @Input() limit = this.defaultConfig.limit;
 
-  @Input()
-  actionConfig: ActionConfigInterface[] = [];
+  @Input() theme: TableThemeEnum = TableThemeEnum.light;
 
-  @Input()
-  sortType: SortType = SortType.single;
+  @Output() onRowClick: EventEmitter<TableEventRowClick> = new EventEmitter();
 
-  @Input()
-  columnMode: ColumnMode = ColumnMode.force;
+  get isDark() {
+    return this.theme === TableThemeEnum.dark;
+  }
 
-  protected readonly actionType = ActionTypeEnum;
+  get isLight() {
+    return this.theme === TableThemeEnum.light;
+  }
 }

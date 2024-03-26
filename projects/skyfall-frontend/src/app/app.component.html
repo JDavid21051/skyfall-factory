@@ -12,12 +12,48 @@
 
   <ngx-table-nested *ngIf="spellMockData"
                     [theme]="currentTheme"
-                    [dataTable]="spellMockData"
-                    [columns]="parentColumns"
-                    [childrenKey]="'ingredients'"
-                    [childrenColumns]="childrenColumns"
-                    [actionConfig]="config"
-                    [childrenActionConfig]="childrenConfig"
+                    [dataTable]="{
+                      data: spellMockData,
+                      columns: parentColumns,
+                      children: {
+                        columns: childrenColumns,
+                        field: 'ingredients',
+                        extra: {
+                          actions: {
+                            data: childrenConfig,
+                            header: 'Acciones'
+                          },
+                          messages: {
+                            empty: 'No hay datos para mostrar.',
+                            error: ''
+                          }
+                        },
+                      },
+                      extra: {
+                        actions: {
+                          data: config,
+                          header: 'Acciones'
+                        },
+                        messages: {
+                          empty: 'No hay datos para mostrar padre.',
+                          error: ''
+                        }
+                      }
+                    }"
+                    (onRowClick)="clickEdit($event)"
   />
 
+  <ngx-table-basic *ngIf="spellMockData"
+                   [theme]="currentTheme"
+                   [dataTable]="{
+                      data: spellMockData,
+                      columns: parentColumns,
+                      extra: {
+                        actions: {
+                          data: config,
+                          header: 'Acciones'
+                        }
+                      }
+                    }"
+  />
 </div>
