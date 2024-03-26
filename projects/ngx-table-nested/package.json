@@ -1,6 +1,6 @@
 {
   "name": "ngx-table-nested",
-  "version": "0.2.0",
+  "version": "1.2.0",
   "description": "The ngx-table-nested library provides a powerful nested table with the ability to collapse rows to display a second table with a different column configuration than the parent. It allows you to create flexible and organised user interfaces to display hierarchical and structured data.",
   "license": "MIT License",
   "author": {
