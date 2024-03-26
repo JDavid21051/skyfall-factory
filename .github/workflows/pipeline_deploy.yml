@@ -40,6 +40,4 @@ jobs:
       - name: Publish library
         run: |
           npm ci
-          npm publish
-          env:
-            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          npm pack
