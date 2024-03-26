@@ -1,5 +1,8 @@
 import {ColumnMode, SortType} from '@swimlane/ngx-datatable';
 
+/**
+ * Column type support
+ */
 export enum ContentTypeColumnEnum {
   'icon' = 'icon',
   'tag' = 'tag',
@@ -7,11 +10,17 @@ export enum ContentTypeColumnEnum {
   'image' = 'image'
 }
 
+/**
+ * Action type support
+ */
 export enum ActionTypeEnum {
   'update' = 'update',
   'delete' = 'delete'
 }
 
+/**
+ * theme app support
+ */
 export enum TableThemeEnum {
   'light' = 'light',
   'dark' = 'dark'
@@ -31,16 +40,19 @@ export interface TableColumnModel {
   type: ContentTypeColumnEnum;
 }
 
+export interface TableIconActionColumnModel {
+  icon?: string;
+  class?: string;
+}
+
 export interface TableActionColumnModel {
   label: string;
-  icon: {
-    icon: string;
-    class: string
-  };
+  icon?: TableIconActionColumnModel;
   type: ActionTypeEnum;
   tooltip: string;
   click: Function;
 }
+
 export interface TableActioneConfigModel {
   data: TableActionColumnModel[];
   header: string;
@@ -57,6 +69,7 @@ export interface TableExtraConfigModel {
   sortType?: SortType;
   columnMode?: ColumnMode;
 }
+
 export interface TableChildrenConfigModel {
   field?: string;
   columns: TableColumnModel[];
