@@ -5,9 +5,7 @@ import {Component, ViewEncapsulation} from '@angular/core';
   standalone: true,
   imports: [],
   encapsulation: ViewEncapsulation.None,
-  template: `
-
-  `,
+  template: ``,
   styleUrl: './table-style.component.scss'
 })
 export class TableStyleComponent {

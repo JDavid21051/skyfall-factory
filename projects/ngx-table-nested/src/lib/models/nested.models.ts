@@ -50,7 +50,7 @@ export interface TableActionColumnModel {
   icon?: TableIconActionColumnModel;
   type: ActionTypeEnum;
   tooltip: string;
-  click: Function;
+  click?: Function;
 }
 
 export interface TableActioneConfigModel {

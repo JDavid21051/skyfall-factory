@@ -14,7 +14,7 @@ const TAG_TEXT_INACTIVE = 'inactive';
   encapsulation: ViewEncapsulation.None,
   template: `
     <ng-container *ngIf="isText(type)">
-      <span> {{ value }}</span>
+      <span>{{ value }}</span>
     </ng-container>
     <ng-container *ngIf="isTag(type)">
       <ngx-table-tag
@@ -25,7 +25,7 @@ const TAG_TEXT_INACTIVE = 'inactive';
       <img *ngIf="value else imgAlternative" [src]="value" width="auto" height="32"
            [alt]="imgConfig.alternativeText ?? 'alternative text'" class="table_img">
       <ng-template #imgAlternative>
-        <span> {{ imgConfig.noImageText ?? 'n/a' }} </span>
+        <span>{{ imgConfig.noImageText ?? 'n/a' }}</span>
       </ng-template>
     </ng-container>
   `

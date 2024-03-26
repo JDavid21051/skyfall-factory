@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import {TableNestedThemeEnum} from 'ngx-table-nested';
+import {TableThemeEnum} from 'ngx-table-nested';
 
 describe('AppComponent', () => {
   let app: AppComponent;
@@ -15,11 +15,11 @@ describe('AppComponent', () => {
   });
 
   it(`should have as treeThemeEnum 'skyfall-frontend'`, () => {
-    expect(app.treeThemeEnum).toEqual(TableNestedThemeEnum);
+    expect(app.treeThemeEnum).toEqual(TableThemeEnum);
   });
 
   it('should render title', () => {
     fixture.detectChanges();
-    expect(app.treeThemeEnum).toEqual(TableNestedThemeEnum);
+    expect(app.currentTheme).toEqual(TableThemeEnum.dark);
   });
 });
